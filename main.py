@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 import os
+import sys
 import openai
 
-data = input()
+stdin = input_str = sys.stdin.read()
+data = "The following is the output of the command git diff. Can you create a pull request description from it?\n" + stdin
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 

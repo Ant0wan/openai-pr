@@ -17,3 +17,10 @@
 
 https://towardsdatascience.com/how-to-write-your-own-github-action-59cc4746a57a
 
+---
+
+## Run
+
+```shell
+echo "What is the capital of Paris ?" | ./main.py
+```
