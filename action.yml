@@ -16,10 +16,8 @@ runs:
     - name: Install Dependencies
       run: pip install -r requirements.txt
       shell: bash
-    - name: Checkout
-      uses: actions/checkout@v3
     - name: Generate description
       id: pr
-      run: git diff HEAD^ HEAD | python main.py
+      run: git show | python main.py
       shell: bash
 
