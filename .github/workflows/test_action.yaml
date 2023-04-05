@@ -9,12 +9,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Fetch num squared
-        id: get_square
+      - name: Generate pr description
+        id: pr
         uses: ./ # Uses an action in the root directory
         # or use a released GitHub Action
         # uses: shipyard/github-action/fetch-shipyard-env@1.0.0
-        with:
-          num: 11
-      - name: Print the square
-        run: echo "${{ steps.get_square.outputs.num_squared }}"
+      - name: Print generated pr description
+        run: echo "${{ steps.pr.outputs.text }}"

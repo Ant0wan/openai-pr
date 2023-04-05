@@ -1,16 +1,11 @@
 # action.yaml
 name: 'openaiprdescription'
 description: 'OpenAI generating PR description'
-inputs:
-  num:
-    description: 'Enter a number'
-    required: true
-    default: "1"
 outputs:
-  num_squared:
-    description: 'Square of the input'
+  text:
+    description: 'Generated PR Description'
     # need to specify the extra `value` field for `composite` actions
-    value: ${{ steps.get-square.outputs.num_squared }}
+    value: ${{ steps.pr.outputs.text }}
 runs:
   using: 'composite'
   steps:
@@ -21,12 +16,8 @@ runs:
     - name: Install Dependencies
       run: pip install -r requirements.txt
       shell: bash
-    - name: Pass Inputs to Shell
-      run: |
-              echo "INPUT_NUM=${{ inputs.num }}" >> $GITHUB_ENV
-      shell: bash
-    - name: Fetch the number's square
-      id: get-square
-      run: python src/get_num_square.py
+    - name: Generate description
+      id: pr
+      run: git diff HEAD^ HEAD | python main.py
       shell: bash
 
