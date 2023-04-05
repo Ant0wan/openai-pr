@@ -1,15 +1,32 @@
+# action.yaml
 name: 'openaiprdescription'
 description: 'OpenAI generating PR description'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  num:
+    description: 'Enter a number'
     required: true
-    default: 'World'
+    default: "1"
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  num_squared:
+    description: 'Square of the input'
+    # need to specify the extra `value` field for `composite` actions
+    value: ${{ steps.get-square.outputs.num_squared }}
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.who-to-greet }}
+  using: 'composite'
+  steps:
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    - name: Install Dependencies
+      run: pip install -r requirements.txt
+      shell: bash
+    - name: Pass Inputs to Shell
+      run: |
+              echo "INPUT_NUM=${{ inputs.num }}" >> $GITHUB_ENV
+      shell: bash
+    - name: Fetch the number's square
+      id: get-square
+      run: python src/get_num_square.py
+      shell: bash
+

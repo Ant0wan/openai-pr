@@ -26,3 +26,5 @@ echo "What is the capital of Paris ?" | ./main.py
 
 [gh_pr_diff](https://cli.github.com/manual/gh_pr_diff)
 
+[Writing Your First Python GitHub Action](https://shipyard.build/blog/your-first-python-github-action/)
+
