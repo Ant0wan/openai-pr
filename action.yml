@@ -1,5 +1,5 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'openaiprdescription'
+description: 'OpenAI generating PR description'
 inputs:
   who-to-greet:  # id of input
     description: 'Who to greet'
