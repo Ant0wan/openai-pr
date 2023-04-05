@@ -20,7 +20,7 @@ echo "What is the capital of Paris ?" | ./main.py
 
 ---
 
-📚 ## Sources
+## 📚 Sources
 
 [how-to-write-your-own-github-action](https://towardsdatascience.com/how-to-write-your-own-github-action-59cc4746a57a)
 
