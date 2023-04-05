@@ -12,9 +12,9 @@ jobs:
       - name: Generate pr description
         id: pr
         uses: ./ # Uses an action in the root directory
-        with:
-          api_key: {{ secrets.OPENAI_API_KEY }}
         # or use a released GitHub Action
         # uses: shipyard/github-action/fetch-shipyard-env@1.0.0
+        with:
+          api_key: {{ secrets.OPENAI_API_KEY }}
       - name: Print generated pr description
         run: echo "${{ steps.pr.outputs.text }}"
