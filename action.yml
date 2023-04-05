@@ -1,6 +1,10 @@
 # action.yaml
 name: 'openaiprdescription'
 description: 'OpenAI generating PR description'
+inputs:
+  api_key:
+    description: 'OpenAI API key'
+    required: true
 outputs:
   text:
     description: 'Generated PR Description'
@@ -20,6 +24,4 @@ runs:
       id: pr
       run: git show | python main.py
       shell: bash
-      env:
-        OPENAI_API_KEY: {{ OPENAI_API_KEY }}
 

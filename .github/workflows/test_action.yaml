@@ -16,3 +16,5 @@ jobs:
         # uses: shipyard/github-action/fetch-shipyard-env@1.0.0
       - name: Print generated pr description
         run: echo "${{ steps.pr.outputs.text }}"
+        with:
+          api_key: {{ secrets.OPENAI_API_KEY }}
