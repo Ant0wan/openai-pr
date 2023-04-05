@@ -15,7 +15,11 @@
 ## Run
 
 ```shell
-echo "What is the capital of Paris ?" | ./main.py
+git diff | ./main.py
+```
+
+```shell
+gh pr diff <url> --patch | ./main.py
 ```
 
 ---
