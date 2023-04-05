@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-gh pr diff <url> | ./main.py
+gh pr diff <url> --patch | ./main.py
