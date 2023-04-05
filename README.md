@@ -10,13 +10,6 @@
   </p>
 </p>
 
-
----
-
-## DOC
-
-https://towardsdatascience.com/how-to-write-your-own-github-action-59cc4746a57a
-
 ---
 
 ## Run
@@ -24,3 +17,11 @@ https://towardsdatascience.com/how-to-write-your-own-github-action-59cc4746a57a
 ```shell
 echo "What is the capital of Paris ?" | ./main.py
 ```
+
+---
+
+## Sources
+
+https://towardsdatascience.com/how-to-write-your-own-github-action-59cc4746a57a
+https://cli.github.com/manual/gh_pr_diff
+
