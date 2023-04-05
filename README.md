@@ -4,7 +4,7 @@
     <img src=".logo.png" alt="Logo" width="90" height="90">
   </a>
 
-  <h1 align="center">OpenAI PR Description</h1>
+  <h1 align="center">OpenAI PR</h1>
 
   <p align="center"><i>Pull request descriptions wrote by OpenAI</i>
   </p>
