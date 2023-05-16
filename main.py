@@ -4,7 +4,7 @@ import sys
 import openai
 
 stdin = input_str = sys.stdin.read()
-data = "The following is the output of the command git diff. Can you create a pull request description from it?\n" + stdin
+data = "Based on the output of the command `git diff`, could you please generate a pull request description using the provided information?\n" + stdin
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
