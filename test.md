@@ -2,8 +2,10 @@
 
 ## 📚 Sources
 
-[how-to-write-your-own-github-action](https://towardsdatascience.com/how-to-write-your-own-github-action-59cc4746a57a)
-[gh_pr_diff](https://cli.github.com/manual/gh_pr_diff)
+[How To Write Your Own GitHub Action](https://towardsdatascience.com/how-to-write-your-own-github-action-59cc4746a57a)
+
+[GitHub Pull Request Diff](https://cli.github.com/manual/gh_pr_diff)
+
 [Writing Your First Python GitHub Action](https://shipyard.build/blog/your-first-python-github-action/)
 
 [How to Test a GitHub Action with GitHub Actions](https://dev.to/cicirello/how-to-test-a-github-action-with-github-actions-2hag)
