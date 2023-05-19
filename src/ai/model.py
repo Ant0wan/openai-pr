@@ -41,4 +41,4 @@ def generate_pull_request_description(stdin):
         stop=[" Human:", " AI:"]
     )
 
-    return response.choices[0].text
+    return response.choices[0].text[1::]
