@@ -3,11 +3,9 @@ import sys
 import openai
 
 
-MODEL = "text-davinci-003"
 INTRO_WRAP = "Based on the output of the command `git diff`, \
 could you please generate a pull request description using the \
 provided information? Be concise.\n"
-
 INTRO_FMT = "Description must follow this format:\n"
 
 # Ability to specify, path to PULL_REQUEST_TEMPLATE
@@ -15,6 +13,7 @@ INTRO_FMT = "Description must follow this format:\n"
 # or None
 # Should retreive info from .github/PULL_REQUEST_TEMPLATE.md if format not
 # specified
+MODEL = "text-davinci-003"  # In github action default
 FORMAT = ""
 
 

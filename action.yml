@@ -1,9 +1,19 @@
 # action.yaml
-name: 'openaiprdescription'
-description: 'OpenAI generating PR description'
+name: 'OpenAI PR Description Generator'
+description: 'A GitHub Action that generates a PR description using OpenAI.'
 inputs:
+  model:
+    description: 'Enter the OpenAI model in use'
+    required: false
+    default: "text-davinci-003"
+  template:
+    description: 'Enter content template for OpenAI to understand what must be in the pull request description'
+    required: false
+  template-filepath:
+    description: 'Path to the PULL_REQUEST_TEMPLATE.md file'
+    required: false
   api_key:
-    description: 'OpenAI API key'
+    description: 'Enter your OpenAI API key'
     required: true
 outputs:
   text:

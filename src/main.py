@@ -3,6 +3,7 @@
 This module generates a pull request description using
 the OpenAI GPT-3.5 language model.
 """
+import os
 import sys
 
 import configuration.logger as logger
@@ -13,6 +14,15 @@ import gh.gh as gh
 
 
 def main():
+    template_content = os.getenv('INPUT_TEMPLATE_CONTENT')
+    template_filepath = os.getenv('INPUT_TEMPLATE_FILEPATH')
+    if template_content:
+        template = template_content
+    elif template_filepath:
+        with open(template_filepath, 'r') as file:
+            template = file.read()
+    else:
+        template = ""
     input_str = sys.stdin.read()
     output = model.generate_pull_request_description(input_str)
     print(output)
