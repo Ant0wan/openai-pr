@@ -12,7 +12,7 @@ inputs:
   template-filepath:
     description: 'Path to the PULL_REQUEST_TEMPLATE.md file'
     required: false
-  api_key:
+  api-key:
     description: 'Enter your OpenAI API key'
     required: true
 outputs:
@@ -30,8 +30,14 @@ runs:
     - name: Install Dependencies
       run: pip install -r requirements.txt
       shell: bash
+    - name: Pass Inputs to Shell
+      run: |
+        echo "INPUT_TEMPLATE_CONTENT=${{ inputs.template }}" >> $GITHUB_ENV
+        echo "INPUT_TEMPLATE_FILEPATH=${{ inputs.template-filepath }}" >> $GITHUB_ENV
+        echo "INPUT_API_KEY=${{ inputs.api-key }}" >> $GITHUB_ENV
+        echo "INPUT_MODEL=${{ inputs.model }}" >> $GITHUB_ENV
     - name: Generate description
       id: pr
-      run: git show | python main.py
+      run: python src/main.py
       shell: bash
 
