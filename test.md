@@ -1,16 +1,3 @@
-
----
-
-```shell
-git diff | ./main.py
-```
-
-```shell
-gh pr diff <url> --patch | ./main.py
-```
-
-
-
 ---
 
 ## 📚 Sources
