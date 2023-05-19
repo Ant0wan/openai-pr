@@ -18,7 +18,8 @@ INTRO_FMT = "Description must follow this format:\n"
 # Ability to specify, path to PULL_REQUEST_TEMPLATE
 # A default format
 # or None
-#Should retreive info from .github/PULL_REQUEST_TEMPLATE.md if format not specified
+# Should retreive info from .github/PULL_REQUEST_TEMPLATE.md if format not
+# specified
 FORMAT = ""
 
 
