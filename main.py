@@ -9,9 +9,17 @@ import sys
 import openai
 
 MODEL = "text-davinci-003"
-FORMAT_WRAP = "Based on the output of the command `git diff`, \
+INTRO_WRAP = "Based on the output of the command `git diff`, \
 could you please generate a pull request description using the \
 provided information?\n"
+
+INTRO_FMT = "Description must follow this format:\n"
+
+# Ability to specify, path to PULL_REQUEST_TEMPLATE
+# A default format
+# or None
+#Should retreive info from .github/PULL_REQUEST_TEMPLATE.md if format not specified
+FORMAT = ""
 
 
 def generate_pull_request_description(stdin):
@@ -24,7 +32,7 @@ def generate_pull_request_description(stdin):
     Returns:
      str: The generated pull request description.
     """
-    data = FORMAT_WRAP + stdin
+    data = INTRO_WRAP + stdin + INTRO_FMT + FORMAT
     openai.api_key = os.getenv("OPENAI_API_KEY")
 
     response = openai.Completion.create(
