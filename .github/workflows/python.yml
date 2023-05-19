@@ -16,26 +16,26 @@ on:
       - main
 
 jobs:
-  pylint:
+  lint:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - linter: pylint
+            cmd: pylint
+            python-version: 3.11
+          - linter: pycodestyle
+            cmd: pycodestyle --show-source --show-pep8
+            python-version: 3.11
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
-          python-version: 3.11
-      - run: pip install pylint
-      - run: find src/ -type d -exec pylint {} \;
-  pycodestyle:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: 3.11
-      - run: pip install pycodestyle
-      - run: find src/ -type d -exec pycodestyle --show-source --show-pep8 {} \;
-  dependencies:
-    needs: [pylint, pycodestyle]
+          python-version: ${{ matrix.python-version }}
+      - run: pip install ${{ matrix.linter }}
+      - run: find src/ -type d -exec ${{ matrix.cmd }} {} \;
+  requirements:
+    needs: [lint]
     runs-on: ubuntu-latest
     strategy:
       matrix:
