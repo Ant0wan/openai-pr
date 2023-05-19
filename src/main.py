@@ -44,7 +44,7 @@ def main():
     #    else:
     #        exit('ERROR: specify either template or filepath')
     url = gh.get_repository_url()
-    # input_str = gh.get_diff(url)
+    input_str = gh.get_diff(url)
     input_str = "key hey key"
     output = model.generate_pull_request_description(input_str)
     set_action_outputs({"text": output})
