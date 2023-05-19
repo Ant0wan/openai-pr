@@ -1,3 +1,23 @@
+import os
+import sys
+import openai
+
+
+MODEL = "text-davinci-003"
+INTRO_WRAP = "Based on the output of the command `git diff`, \
+could you please generate a pull request description using the \
+provided information? Be concise.\n"
+
+INTRO_FMT = "Description must follow this format:\n"
+
+# Ability to specify, path to PULL_REQUEST_TEMPLATE
+# A default format
+# or None
+# Should retreive info from .github/PULL_REQUEST_TEMPLATE.md if format not
+# specified
+FORMAT = ""
+
+
 def generate_pull_request_description(stdin):
     """
     Generate a pull request description based on the provided input.
@@ -23,5 +43,3 @@ def generate_pull_request_description(stdin):
     )
 
     return response.choices[0].text
-
-

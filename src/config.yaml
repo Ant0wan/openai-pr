@@ -1,0 +1,11 @@
+---
+preflights:
+  env:
+    - GITHUB_TOKEN
+    - FORMAT
+    - MODEL
+    - INTRO_WRAP
+    - INTRO_FMT
+logs:
+  logging: 'configuration/logging.conf'
+  profile: dev  # choose(dev|prod)
