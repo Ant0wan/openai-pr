@@ -34,7 +34,7 @@ jobs:
           python-version: 3.11
       - run: pip install pycodestyle
       - run: find src/ -type d -exec pycodestyle --show-source --show-pep8 {} \;
-  build:
+  dependencies:
     needs: [pylint, pycodestyle]
     runs-on: ubuntu-latest
     strategy:
