@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
-gh pr diff <url> --patch | ./main.py
+#!/bin/sh
+git diff HEAD^ HEAD | python src/main.py
 
-git diff HEAD^ HEAD | ./main.py
+#gh pr diff <url> --patch | ./main.py
