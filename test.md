@@ -11,7 +11,7 @@
 
 ---
 
-## CI
+## 🛠 Continuous Integration
 
 - **Linting**: Running linters like Pylint or Flake8 to ensure code quality and adherence to coding standards.
 - **Unit Testing**: Executing unit tests to verify the functionality of individual units of code. Tools like pytest or unittest can be used for this purpose.
