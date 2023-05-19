@@ -11,7 +11,7 @@ import openai
 MODEL = "text-davinci-003"
 INTRO_WRAP = "Based on the output of the command `git diff`, \
 could you please generate a pull request description using the \
-provided information?\n"
+provided information? Be concise.\n"
 
 INTRO_FMT = "Description must follow this format:\n"
 
