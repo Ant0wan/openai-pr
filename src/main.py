@@ -29,7 +29,6 @@ def main():
 #        exit('ERROR: specify either template or filepath')
     with open(output_path, 'a') as file:
         url = gh.get_repository_url()
-        print(url)
         input_str="ey hey hey"
         #input_str = gh.get_diff(url)
         output = model.generate_pull_request_description(input_str)
