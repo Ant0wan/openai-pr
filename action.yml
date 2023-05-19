@@ -1,13 +1,16 @@
 name: 'OpenAI PR Description Generator'
-description: 'A GitHub Action that generates a PR description using OpenAI.'
 author: "Antoine Barthelemy <antoine@linux.com>"
+description: 'A GitHub Action that generates a PR description using OpenAI.'
+branding:
+  icon: 'play'
+  color: 'black'
 inputs:
   model:
-    description: 'Enter the OpenAI model in use'
+    description: 'OpenAI model in use'
     required: false
     default: "text-davinci-003"
   template:
-    description: 'Enter content template for OpenAI to understand what must be in the pull request description'
+    description: 'PR content template for OpenAI to understand what must be in the pull request description'
     required: false
     default: ""
   template-filepath:
@@ -15,13 +18,16 @@ inputs:
     required: false
     default: ".github/PULL_REQUEST_TEMPLATE.md"
   api-key:
-    description: 'Enter your OpenAI API key'
+    description: 'OpenAI API key'
+    required: true
+    default: ""
+  github-token:
+    description: 'Github Token'
     required: true
     default: ""
 outputs:
   text:
-    description: 'Generated PR Description'
-    # need to specify the extra `value` field for `composite` actions
+    description: 'Text in the pull request description'
     value: ${{ steps.pr.outputs.text }}
 runs:
   using: 'composite'
@@ -29,20 +35,16 @@ runs:
     - name: Install Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.10'
+        python-version: '3.11'
     - name: Install Dependencies
       run: pip install -r requirements.txt
       shell: bash
-    - name: Pass Inputs to Shell
-      run: |
-        echo "INPUT_TEMPLATE_CONTENT=${{ inputs.template }}" >> $GITHUB_ENV
-        echo "INPUT_TEMPLATE_FILEPATH=${{ inputs.template-filepath }}" >> $GITHUB_ENV
-        echo "INPUT_API_KEY=${{ inputs.api-key }}" >> $GITHUB_ENV
-        echo "INPUT_MODEL=${{ inputs.model }}" >> $GITHUB_ENV
     - name: Generate description
       id: pr
       run: python src/main.py
       shell: bash
-branding:
-  icon: 'search'
-  color: 'gray-dark'
+      env:
+        INPUT_TEMPLATE_CONTENT: ${{ inputs.template }}
+        INPUT_TEMPLATE_FILEPATH: ${{ inputs.template-filepath }}
+        INPUT_API_KEY: ${{ inputs.api-key }}
+        INPUT_MODEL: ${{ inputs.model }}

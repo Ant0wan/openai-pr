@@ -1,9 +1,8 @@
-# .github/workflows/test_action.yaml
 name: Test Action
 on: [push]
 
 jobs:
-  get-num-square:
+  test:
     runs-on: ubuntu-latest
     name: Display the generated PR description
     steps:
