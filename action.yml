@@ -1,6 +1,6 @@
-# action.yaml
 name: 'OpenAI PR Description Generator'
 description: 'A GitHub Action that generates a PR description using OpenAI.'
+author: "Antoine Barthelemy <antoine@linux.com>"
 inputs:
   model:
     description: 'Enter the OpenAI model in use'
@@ -9,12 +9,15 @@ inputs:
   template:
     description: 'Enter content template for OpenAI to understand what must be in the pull request description'
     required: false
+    default: ""
   template-filepath:
     description: 'Path to the PULL_REQUEST_TEMPLATE.md file'
     required: false
+    default: ".github/PULL_REQUEST_TEMPLATE.md"
   api-key:
     description: 'Enter your OpenAI API key'
     required: true
+    default: ""
 outputs:
   text:
     description: 'Generated PR Description'
@@ -40,4 +43,6 @@ runs:
       id: pr
       run: python src/main.py
       shell: bash
-
+branding:
+  icon: 'search'
+  color: 'gray-dark'
