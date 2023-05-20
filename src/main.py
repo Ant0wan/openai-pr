@@ -6,9 +6,9 @@ the OpenAI GPT-3.5 language model.
 import os
 import sys
 
-import configuration.logger as logger
-import configuration.parser as parser
-import configuration.preflights as preflights
+import config.logger as logger
+import config.parser as parser
+import config.preflights as preflights
 import ai.model as model
 import gh.gh as gh
 
@@ -43,11 +43,16 @@ def main():
     #            template = file.read()
     #    else:
     #        exit('ERROR: specify either template or filepath')
-    pr = gh.get_pull_request()
-    pr_diff = gh.get_pull_request_diff(pr)
-    description = model.generate_pull_request_description(pr_diff)
-    print(f"text={description}")
-    gh.change_pull_request_description(pr.number, description)
+    github_token = os.getenv('GITHUB_TOKEN')
+    pr = gh.get_pull_request(github_token)
+    print(pr)
+#    pr_diff = gh.get_pull_request_diff(pr)
+#    print(pr_diff)
+#    #description = model.generate_pull_request_description(pr_diff)
+#    #print(f"text={description}")
+#    print(pr.number)
+#    description="hey!"
+#    gh.change_pull_request_description(pr.number, description)
 
 
 if __name__ == '__main__':

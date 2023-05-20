@@ -53,14 +53,8 @@ def get_owner_and_repo():
     return owner, repo
 
 
-def get_pull_request():
-    """
-    Retrieves the open pull request associated with the current branch.
-
-    Returns:
-        github.PullRequest.PullRequest or None: The open pull request or None if not found.
-    """
-    g = Github()
+def get_pull_request(github_token):
+    g = Github(github_token)
     branch_name = get_current_branch()
     owner, repo = get_owner_and_repo()
     repository = g.get_repo(f'{owner}/{repo}')

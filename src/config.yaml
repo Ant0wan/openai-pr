@@ -2,10 +2,10 @@
 preflights:
   env:
     - GITHUB_TOKEN
-    - FORMAT
-    - MODEL
-    - INTRO_WRAP
-    - INTRO_FMT
+    - INPUT_TEMPLATE_CONTENT
+    - INPUT_TEMPLATE_FILEPATH
+    - INPUT_API_KEY
+    - INPUT_MODEL
 logs:
-  logging: 'configuration/logging.conf'
+  logging: 'config/logging.conf'
   profile: dev  # choose(dev|prod)
