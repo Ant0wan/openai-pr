@@ -36,6 +36,8 @@ runs:
     - name: Upgrade Pip
       run: pip install --upgrade pip
       shell: bash
+    - run: pwd && ls -la .
+      shell: bash
     - name: Install Dependencies
       run: pip install -r requirements.txt
       shell: bash
