@@ -23,6 +23,8 @@ import OpenAI.model as model
 import GitHub.pullrequest as pr
 import GitHub.outputs as outputs
 
+import subprocess
+
 def main():
     """
     The main function that serves as the entry point for the script.
