@@ -23,6 +23,7 @@ def main():
     github_token = env.vars['GITHUB_TOKEN']
     pullrequest = pr.PullRequest(github_token)
     logging.info(pullrequest)
+    logging.info(pullrequest.diff())
 #    pr_diff = gh.get_pull_request_diff(pr)
 #    print(pr_diff)
 #    #description = model.generate_pull_request_description(pr_diff)

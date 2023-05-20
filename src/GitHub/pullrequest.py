@@ -50,8 +50,7 @@ PullRequest: {self.__pulls}"
     def diff(self):
         diff_url = self.__pulls.diff_url
         response = requests.get(diff_url)
-        diff_content = response.text
-        return diff_content
+        return response.text
 
 
 # def change_pull_request_description(pr_number, new_description):
