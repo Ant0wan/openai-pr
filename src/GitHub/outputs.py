@@ -17,4 +17,3 @@ def set_action_outputs(output_pairs):
     else:
         for key, value in output_pairs.items():
             print("{0}={1}".format(key, value))
-

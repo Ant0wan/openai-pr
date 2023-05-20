@@ -14,6 +14,7 @@ import OpenAI.model as model
 import GitHub.pullrequest as pr
 import GitHub.outputs as outputs
 
+
 def main():
     config = parse.Yaml('config.yaml').conf
     logger = logs.Logger(config)
