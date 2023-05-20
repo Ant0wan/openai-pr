@@ -130,8 +130,9 @@ PullRequest: {self.__pulls}"
         Raises:
             subprocess.CalledProcessError: If the 'git' command fails.
         """
-        return subprocess.check_output(
-            ['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip().decode('utf-8')
+        return os.environ.get('GITHUB_BRANCH')
+        #return subprocess.check_output(
+         #   ['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip().decode('utf-8')
 
     @staticmethod
     def _pulls(repo, branch):
