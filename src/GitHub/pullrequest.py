@@ -131,6 +131,8 @@ PullRequest: {self.__pulls}"
         Raises:
             subprocess.CalledProcessError: If the 'git' command fails.
         """
+        branch = os.environ.get('GITHUB_BRANCH')
+        print(f"BRANCH: {branch}", file=sys.stderr)
         return os.environ.get('GITHUB_BRANCH')
         #return subprocess.check_output(
          #   ['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip().decode('utf-8')
