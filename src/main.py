@@ -23,8 +23,6 @@ import OpenAI.model as model
 import GitHub.pullrequest as pr
 import GitHub.outputs as outputs
 
-import subprocess
-
 def main():
     """
     The main function that serves as the entry point for the script.
@@ -43,7 +41,7 @@ def main():
 
     github_token = env.vars['GITHUB_TOKEN']
     git = subprocess.check_output(
-            ['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip().decode('utf-8')
+            ['git', 'config', '-l']).strip().decode('utf-8')
     print(f"{git}", file=sys.stderr)
 
     pullrequest = pr.PullRequest(github_token)
