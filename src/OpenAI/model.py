@@ -6,12 +6,11 @@ import openai
 class AiRequest:
 
     header = "Based on the output of the command `git diff`, could you please generate a pull request description using the provided information? Be concise.\nDescription must follow this format:\n"
-    model = "text-davinci-003"
 
     def __init__(self, template, template_file_path, header, model):
         self.__template = self._template(template, template_file_path)
         self.__header = self._header(header)
-        self.__model = self._model(model)
+        self.__model = model
 
     def __str__(self):
         return f"Template: {self.__template}, \
@@ -37,12 +36,6 @@ Model: {self.__model}"
         if header:
             return header
         return AiRequest.header
-
-    @staticmethod
-    def _model(model):
-        if model:
-            return model
-        return AiRequest.model
 
 # Ability to specify, path to PULL_REQUEST_TEMPLATE
 # A default format

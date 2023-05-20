@@ -17,6 +17,10 @@ inputs:
     description: 'Path to the PULL_REQUEST_TEMPLATE.md file'
     required: false
     default: ".github/PULL_REQUEST_TEMPLATE.md"
+  header:
+    description: 'Intro phrase giving context to the model'
+    required: false
+    default: "Based on the output of the command `git diff`, could you please generate a pull request description using the provided information? Be concise. Description must follow this format:\n"
   api-key:
     description: 'OpenAI API key'
     required: true
@@ -44,7 +48,9 @@ runs:
       run: python src/main.py
       shell: bash
       env:
-        INPUT_TEMPLATE_CONTENT: ${{ inputs.template }}
+        INPUT_TEMPLATE: ${{ inputs.template }}
         INPUT_TEMPLATE_FILEPATH: ${{ inputs.template-filepath }}
-        INPUT_API_KEY: ${{ inputs.api-key }}
+        INPUT_HEADER: ${{ inputs.header }}
         INPUT_MODEL: ${{ inputs.model }}
+        OPENAI_API_KEY: ${{ inputs.api-key }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
