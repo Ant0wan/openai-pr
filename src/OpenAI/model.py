@@ -2,6 +2,7 @@ import os
 import sys
 import openai
 
+
 class AiRequest:
 
     header = "Based on the output of the command `git diff`, could you please generate a pull request description using the provided information? Be concise.\nDescription must follow this format:\n"

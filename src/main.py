@@ -28,10 +28,10 @@ def main():
     logging.debug(patch)
 
     ai = model.AiRequest(
-            env.vars['INPUT_TEMPLATE'],
-            env.vars['INPUT_TEMPLATE_FILEPATH'],
-            env.vars['INPUT_HEADER'],
-            env.vars['INPUT_MODEL']
+        env.vars['INPUT_TEMPLATE'],
+        env.vars['INPUT_TEMPLATE_FILEPATH'],
+        env.vars['INPUT_HEADER'],
+        env.vars['INPUT_MODEL']
     )
     logging.debug(ai)
 #    description = ai.generate_description(patch)
