@@ -33,7 +33,7 @@ def main():
     """
     actionpath = os.environ.get('GITHUB_ACTION_PATH')
     if actionpath:
-        yamlfile = f"{path}/src/config.yaml"
+        yamlfile = f"{actionpath}/src/config.yaml"
     else:
         yamlfile = 'config.yaml'
     config = parse.Yaml(yamlfile).conf
