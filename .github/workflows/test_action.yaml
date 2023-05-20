@@ -11,14 +11,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Generate pr description
+      - name: Generate a PR Description
         id: pr
-        uses: ./ # Uses an action in the root directory
+        uses: ./
         with:
           api-key: ${{ secrets.OPENAI_API_KEY }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-            #github-token: ${{ secrets.GH_TOKEN }}
-        # or use a released GitHub Action
-        # uses: shipyard/github-action/fetch-shipyard-env@1.0.0
-            #- name: Print generated pr description
-            #  run: echo "${{ steps.pr.outputs.text }}"
