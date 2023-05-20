@@ -13,7 +13,8 @@ jobs:
         uses: ./ # Uses an action in the root directory
         with:
           api-key: ${{ secrets.OPENAI_API_KEY }}
-          github-token: ${{ secrets.GH_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+            #github-token: ${{ secrets.GH_TOKEN }}
         # or use a released GitHub Action
         # uses: shipyard/github-action/fetch-shipyard-env@1.0.0
             #- name: Print generated pr description
