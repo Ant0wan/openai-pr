@@ -52,11 +52,5 @@ PullRequest: {self.__pulls}"
         response = requests.get(diff_url)
         return response.text
 
-
-# def change_pull_request_description(pr_number, new_description):
-#    g = Github()
-#    owner, repo = get_owner_and_repo()
-#    repository = g.get_repo(f'{owner}/{repo}')
-#
-#    pull_request = repository.get_pull(pr_number)
-#    pull_request.edit(body=new_description)
+    def update_description(self, new_description):
+        self.__pulls.edit(body=new_description)

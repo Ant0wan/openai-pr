@@ -37,10 +37,10 @@ def main():
     logging.debug(ai)
     description = ai.generate_description(patch)
 
-#    #print(f"text={description}")
-#    print(pr.number)
-#    description="hey!"
-#    gh.change_pull_request_description(pr.number, description)
+    logging.debug(description)
+    outputs.set_action_outputs({"text": f"{description}"})
+
+    pullrequest.update_description(description)
 
 
 if __name__ == '__main__':
