@@ -16,9 +16,10 @@ git push --set-upstream origin "$BRANCH"
 gh pr create --title "[TEST] - PR $ID" --body ""
 
 cd src/
-python src/main.py
+python main.py
 cd ..
 gh pr view
 sleep 5
+
 git checkout main
 gh pr close "$BRANCH" --delete-branch
