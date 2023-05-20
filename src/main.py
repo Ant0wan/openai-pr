@@ -29,7 +29,8 @@ def main():
 
     ai = model.AiRequest(env.vars[''], env.vars[''], env.vars[''], env.vars[''])
     logging.debug(ai)
-#    #description = model.generate_pull_request_description(pr_diff)
+#    description = ai.generate_description(patch)
+
 #    #print(f"text={description}")
 #    print(pr.number)
 #    description="hey!"

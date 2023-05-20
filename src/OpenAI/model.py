@@ -14,6 +14,12 @@ class AiRequest:
         self.__header = header
         self.__model = model
 
+    def __str__(self):
+        return f"Template: {self.__template}, \
+TemplateFilePath: {self.__template_file_path}, \
+Header: {self.__header}, \
+Model: {self.__model}"
+
     @staticmethod
     def _template(template, template_file_path):
         if template:
