@@ -8,31 +8,29 @@ class PullRequest:
     def __init__(self, github_token: str):
         self.__g = Github(github_token)
         self.__url = self._repository_url()
-        self.__repository = g.get_repo(f'{self._owner()}/{self._repo()}')
-        self.__branch = self._branch()
-        self.__pulls = self._pulls()
+        self.__repository = self._repository(self.__g, self.__url)
+#        self.__branch = self._branch()
+#        self.__pulls = self._pulls()
+
+
+    def __str__(self):
+        return f"Github object: {self.__g}, \
+Url: {self.__url}, \
+Repository: {self.__repository}"
 
 
     @staticmethod
     def _repository_url():
-        remote_url = subprocess.check_output(
+        remote = subprocess.check_output(
             ['git', 'config', '--get', 'remote.origin.url']).decode().strip()
-        repository_url = remote_url.replace(".git", "")
-        return repository_url
-
+        return remote.replace(".git", "")
 
     @staticmethod
-    def _owner():
-        remote_url = self.__url
-        parts = remote_url.split('/')
-        return parts[-2]
-
-
-    @staticmethod
-    def _repo():
-        remote_url = self.__url
-        parts = remote_url.split('/')
-        return parts[-1].rstrip('.git')
+    def _repository(g, url):
+        parts = url.split('/')
+        owner = parts[-2]
+        repo = parts[-1].rstrip('.git')
+        return g.get_repo(f'{owner}/{repo}')
 
 
     @staticmethod
