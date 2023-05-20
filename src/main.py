@@ -46,7 +46,8 @@ def main():
     logging.info(pullrequest)
 
     patch = pullrequest.diff()
-    logging.debug(patch)
+    #logging.debug(patch)
+    logging.info(patch)
 
     ai = model.AiRequest(
         env.vars['OPENAI_API_KEY'],
