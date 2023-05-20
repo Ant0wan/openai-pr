@@ -2,7 +2,8 @@ name: Test
 on:
   push:
 
-permissions: write-all
+permissions:
+    pull-requests: write
 
 jobs:
   test:
