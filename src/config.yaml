@@ -7,5 +7,5 @@ preflights:
       #    - INPUT_API_KEY
       #    - INPUT_MODEL
 logs:
-  logging: 'config/logging.conf'
+  logging: 'configuration/logging.conf'
   profile: dev  # choose(dev|prod)

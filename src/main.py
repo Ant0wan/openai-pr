@@ -34,7 +34,7 @@ def set_action_outputs(output_pairs):
 def main():
     config = parse.Yaml('config.yaml').conf
     logger = logs.Logger(config)
-#    env = preflights.Env(config)
+    env = preflight.Env(config)
     #    template_content = os.getenv('INPUT_TEMPLATE_CONTENT')
     #    template_filepath = os.getenv('INPUT_TEMPLATE_FILEPATH')
     #    if template_content and template_filepath:
