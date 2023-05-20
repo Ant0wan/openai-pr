@@ -43,11 +43,11 @@ def main():
     #            template = file.read()
     #    else:
     #        exit('ERROR: specify either template or filepath')
-    pr = get_pull_request()
+    pr = gh.get_pull_request()
     pr_diff = gh.get_pull_request_diff(pr)
     description = model.generate_pull_request_description(pr_diff)
     print(f"text={description}")
-    change_pull_request_description(pr.number, description)
+    gh.change_pull_request_description(pr.number, description)
 
 
 if __name__ == '__main__':
