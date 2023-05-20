@@ -22,13 +22,12 @@ new_description = "Updated pull request description"
 pull_request.update_description(new_description)
 
 """
+import os
 import requests
 import subprocess
 import logging
 from github import Github
 
-import sys
-import os
 
 class PullRequest:
     """
@@ -116,8 +115,6 @@ PullRequest: {self.__pulls}"
         parts = url.split('/')
         owner = parts[-2]
         repo = parts[-1]
-        print(f"owner: {owner}", file=sys.stderr)
-        print(f"repo: {repo}", file=sys.stderr)
         return g.get_repo(f'{owner}/{repo}')
 
     @staticmethod
@@ -131,11 +128,7 @@ PullRequest: {self.__pulls}"
         Raises:
             subprocess.CalledProcessError: If the 'git' command fails.
         """
-        branch = os.environ.get('GITHUB_BRANCH')
-        print(f"BRANCH: {branch}", file=sys.stderr)
         return os.environ.get('GITHUB_BRANCH')
-        #return subprocess.check_output(
-         #   ['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip().decode('utf-8')
 
     @staticmethod
     def _pulls(repo, branch):

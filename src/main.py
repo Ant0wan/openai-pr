@@ -44,9 +44,6 @@ def main():
     github_token = env.vars['GITHUB_TOKEN']
     pullrequest = pr.PullRequest(github_token)
     logging.info(pullrequest)
-    git = subprocess.check_output(
-            ['gh', 'pr', 'view']).strip().decode('utf-8')
-    print(f"{git}", file=sys.stderr)
 
     patch = pullrequest.diff()
     logging.debug(patch)
