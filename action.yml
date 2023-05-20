@@ -40,6 +40,8 @@ runs:
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
+    - name: Upgrade Pip
+      run: pip install --upgrade pip
     - name: Install Dependencies
       run: pip install -r requirements.txt
       shell: bash
