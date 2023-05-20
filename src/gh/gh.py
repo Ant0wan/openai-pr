@@ -90,3 +90,22 @@ def get_pull_request_diff():
         response = requests.get(diff_url)
         diff_content = response.text
         return diff_content
+
+
+def change_pull_request_description(pr_number, new_description):
+    """
+    Change the description of a pull request.
+
+    Args:
+        pr_number (int): The number of the pull request.
+        new_description (str): The new description for the pull request.
+
+    Raises:
+        github.GithubException: If an error occurs while accessing the GitHub API.
+    """
+    g = Github()
+    owner, repo = get_owner_and_repo()
+    repository = g.get_repo(f'{owner}/{repo}')
+
+    pull_request = repository.get_pull(pr_number)
+    pull_request.edit(body=new_description)
