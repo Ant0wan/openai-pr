@@ -1,11 +1,12 @@
 ---
 preflights:
   env:
-    - GITHUB_TOKEN
     - INPUT_TEMPLATE
     - INPUT_TEMPLATE_FILEPATH
-      #- INPUT_API_KEY
+    - INPUT_HEADER
     - INPUT_MODEL
+    - OPENAI_API_KEY
+    - GITHUB_TOKEN
 logs:
   logging: 'configuration/logging.conf'
   profile: dev  # choose(dev|prod)
