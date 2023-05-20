@@ -2,19 +2,22 @@ import os
 import sys
 import openai
 
+class AiRequest:
 
-INTRO_WRAP = "Based on the output of the command `git diff`, \
-could you please generate a pull request description using the \
-provided information? Be concise.\n"
-INTRO_FMT = "Description must follow this format:\n"
+    header = "Based on the output of the command `git diff`, could you please generate a pull request description using the provided information? Be concise.\nDescription must follow this format:\n"
+    template_file_path = ".github/PULL_REQUEST_TEMPLATE.md"
+
+    def __init__(self, template="", template_file_path=AiRequest.template_path, header=AiRequest.header, model="text-davinci-003"):
+        self.__header = header
+        self.__model = model
+        self.__template = template
+
 
 # Ability to specify, path to PULL_REQUEST_TEMPLATE
 # A default format
 # or None
 # Should retreive info from .github/PULL_REQUEST_TEMPLATE.md if format not
 # specified
-MODEL = "text-davinci-003"  # In github action default
-FORMAT = ""
 
 #    template_content = os.getenv('INPUT_TEMPLATE_CONTENT')
 #    template_filepath = os.getenv('INPUT_TEMPLATE_FILEPATH')
