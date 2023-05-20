@@ -12,7 +12,6 @@ class AiRequest:
 
     def __str__(self):
         return f"Template: {self.__template}, \
-TemplateFilePath: {self.__template_file_path}, \
 Header: {self.__header}, \
 Model: {self.__model}"
 
@@ -22,6 +21,8 @@ Model: {self.__model}"
             return template
         elif template_file_path:
             try:
+                # This path need to be absolute using git root dir path +
+                # .github/PULL_RE...
                 with open(template_file_path, "r") as file:
                     return file.read()
             except FileNotFoundError:
