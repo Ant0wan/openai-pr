@@ -114,7 +114,7 @@ PullRequest: {self.__pulls}"
         """
         parts = url.split('/')
         owner = parts[-2]
-        repo = parts[-1].rstrip('.git')
+        repo = parts[-1]
         print(f"owner: {owner}", file=sys.stderr)
         print(f"repo: {repo}", file=sys.stderr)
         return g.get_repo(f'{owner}/{repo}')
