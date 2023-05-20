@@ -25,10 +25,10 @@ inputs:
     description: 'Github Token'
     required: true
     default: ""
-outputs:
-  text:
-    description: 'Text in the pull request description'
-    value: ${{ steps.pr.outputs.text }}
+      #outputs:
+      #  text:
+      #    description: 'Text in the pull request description'
+      #    value: ${{ steps.pr.outputs.text }}
 runs:
   using: 'composite'
   steps:

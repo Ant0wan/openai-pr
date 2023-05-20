@@ -6,9 +6,9 @@ the OpenAI GPT-3.5 language model.
 import os
 import sys
 
-import config.logger as logger
-import config.parser as parser
-import config.preflights as preflights
+import configuration.logs as logs
+import configuration.parse as parse
+import configuration.preflight as preflight
 import ai.model as model
 import gh.gh as gh
 
@@ -32,6 +32,9 @@ def set_action_outputs(output_pairs):
 
 
 def main():
+    config = parse.Yaml('config.yaml').conf
+    logger = logs.Logger(config)
+#    env = preflights.Env(config)
     #    template_content = os.getenv('INPUT_TEMPLATE_CONTENT')
     #    template_filepath = os.getenv('INPUT_TEMPLATE_FILEPATH')
     #    if template_content and template_filepath:
