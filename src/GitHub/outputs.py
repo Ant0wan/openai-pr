@@ -1,4 +1,5 @@
 import os
+import logging
 
 
 def set_action_outputs(output_pairs):

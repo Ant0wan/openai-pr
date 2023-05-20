@@ -15,7 +15,7 @@ git push --set-upstream origin "$BRANCH"
 
 gh pr create --title "[TEST] - PR $ID" --body ""
 
-python src/main.py
+#python src/main.py
 #gh pr view
 #
 #git checkout main

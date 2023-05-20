@@ -1,6 +1,7 @@
 import os
 import sys
 import openai
+import logging
 
 
 class AiRequest:
@@ -34,7 +35,7 @@ Model: {self.__model}"
                 return " "  # should exit fail
 
     def generate_description(self, text):
-        data = self.__header + self.__template + "\n\n\n" + text
+        data = self.__header + self.__template + "\n\n" + text
         openai.api_key = self.__key
         response = openai.Completion.create(
             model=self.__model,

@@ -3,9 +3,9 @@
 This module generates a pull request description using
 the OpenAI GPT-3.5 language model.
 """
-import logging
 import os
 import sys
+import logging
 
 import configuration.logs as logs
 import configuration.parse as parse
@@ -37,10 +37,10 @@ def main():
     logging.debug(ai)
     description = ai.generate_description(patch)
 
-#    #print(f"text={description}")
-#    print(pr.number)
-#    description="hey!"
-#    gh.change_pull_request_description(pr.number, description)
+    logging.debug(description)
+    outputs.set_action_outputs({"text": f"{description}"})
+
+    pullrequest.update_description(description)
 
 
 if __name__ == '__main__':
