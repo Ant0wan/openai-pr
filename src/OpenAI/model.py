@@ -1,6 +1,7 @@
 import os
 import sys
 import openai
+import logging
 
 
 class AiRequest:

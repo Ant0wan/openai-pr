@@ -3,9 +3,9 @@
 This module generates a pull request description using
 the OpenAI GPT-3.5 language model.
 """
-import logging
 import os
 import sys
+import logging
 
 import configuration.logs as logs
 import configuration.parse as parse
