@@ -36,10 +36,10 @@ runs:
       run: pip install --upgrade pip
       shell: bash
     - name: Install Dependencies
-      run: pip install -r requirements.txt
+      run: pip install -r ${{ github.action_path }}/requirements.txt
       shell: bash
     - name: Generate description
-      run: python src/main.py
+      run: python ${{ github.action_path }}/src/main.py
       shell: bash
       env:
         INPUT_TEMPLATE: ${{ inputs.template }}
