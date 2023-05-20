@@ -35,3 +35,12 @@ def get_pull_request_number():
     else:
         pr = pull_requests[0]
         return pr
+
+
+def get_pull_request_diff():
+    pull_request = get_pull_request_number()
+    if pull_request is None:
+        return "No open pull request found for the current branch."
+    else:
+        diff = pull_request.diff()
+        return diff
