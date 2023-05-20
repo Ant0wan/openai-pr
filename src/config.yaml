@@ -9,4 +9,4 @@ preflights:
     - GITHUB_TOKEN
 logs:
   logging: 'configuration/logging.conf'
-  profile: dev  # choose(dev|prod)
+  profile: action  # choose(dev|prod)
