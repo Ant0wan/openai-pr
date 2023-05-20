@@ -9,10 +9,9 @@ class AiRequest:
     template_file_path = ".github/PULL_REQUEST_TEMPLATE.md"
 
     def __init__(self, template, template_file_path, header, model):
-        self.__template = template
-        self.__template_file_path = template_file_path
-        self.__header = header
-        self.__model = model
+        self.__template = self._template(template, template_file_path)
+        self.__header = self._header(header)
+        self.__model = self._model(model)
 
     def __str__(self):
         return f"Template: {self.__template}, \
@@ -24,15 +23,34 @@ Model: {self.__model}"
     def _template(template, template_file_path):
         if template:
             return template
-        if 
+        elif template_file_path:
+            try:
+                with open(template_file_path, "r") as file:
+                    return file.read()
+            except FileNotFoundError:
+                print("Template file not found.")
+            except IOError:
+                print("Error reading the file.")
+        else:
+            try:
+                with open(AiRequest.template_file_path, "r") as file:
+                    return file.read()
+            except FileNotFoundError:
+                print("No template file found.")
+            except IOError:
+                print("Error reading the file.")
 
-        try:
-            with open(template_file_path, "r") as file:
-                return file.read()
-        except FileNotFoundError:
-            print("File not found.")
-        except IOError:
-            print("Error reading the file.")
+    @staticmethod
+    def _header(header):
+        if header:
+            return header
+        return AiRequest.header
+
+    @staticmethod
+    def _model(model):
+        if model:
+            return model
+        return AiRequest.model
 
 # Ability to specify, path to PULL_REQUEST_TEMPLATE
 # A default format

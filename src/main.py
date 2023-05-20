@@ -27,7 +27,12 @@ def main():
     patch = pullrequest.diff()
     logging.debug(patch)
 
-    ai = model.AiRequest(env.vars[''], env.vars[''], env.vars[''], env.vars[''])
+    ai = model.AiRequest(
+            env.vars['INPUT_TEMPLATE'],
+            env.vars['INPUT_TEMPLATE_FILEPATH'],
+            env.vars['INPUT_HEADER'],
+            env.vars['INPUT_MODEL']
+    )
     logging.debug(ai)
 #    description = ai.generate_description(patch)
 
