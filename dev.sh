@@ -11,8 +11,8 @@ git add "$FILE"
 git commit -m "init(pr): add file for test"
 git push --set-upstream origin "$BRANCH"
 gh pr create --title "[TEST] - PR $ID" --body ""
-python src/main.py
-gh pr view
-sleep 5
-git checkout main
-gh pr close "$BRANCH" --delete-branch
+#python src/main.py
+#gh pr view
+#sleep 5
+#git checkout main
+#gh pr close "$BRANCH" --delete-branch

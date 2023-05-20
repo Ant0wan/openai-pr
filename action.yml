@@ -25,9 +25,6 @@ inputs:
     description: 'OpenAI API key'
     required: true
     default: ""
-  github-token:
-    description: 'Github Token'
-    required: true
 runs:
   using: 'composite'
   steps:
@@ -74,4 +71,3 @@ yarl==1.9.2
         INPUT_HEADER: ${{ inputs.header }}
         INPUT_MODEL: ${{ inputs.model }}
         OPENAI_API_KEY: ${{ inputs.api-key }}
-        GITHUB_TOKEN: ${{ inputs.github-token }}
