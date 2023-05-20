@@ -9,12 +9,29 @@ def get_repository_url():
     return repository_url
 
 
-def get_diff(url):
-    url_parts = url.split("/")
-    repository = "/".join(url_parts[-4:-2])
-    pull_request_number = int(url_parts[-1])
+def get_current_branch():
+    return subprocess.check_output(
+        ['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip().decode('utf-8')
+
+
+def get_owner_and_repo():
+    remote_url = get_repository_url()
+    parts = remote_url.split('/')
+    owner = parts[-2]
+    repo = parts[-1].rstrip('.git')
+    return owner, repo
+
+
+def get_pull_request_number():
     g = Github()
-    repo = g.get_repo(repository)
-    pull_request = repo.get_pull(pull_request_number)
-    diff_text = pull_request.diff()
-    return diff_text
+    branch_name = get_current_branch()
+    owner, repo = get_owner_and_repo()
+    repository = g.get_repo(f'{owner}/{repo}')
+    pull_requests = repository.get_pulls(
+        state='open', head=f'{repository.owner.login}:{branch_name}')
+
+    if pull_requests.totalCount == 0:
+        return None
+    else:
+        pr = pull_requests[0]
+        return pr
