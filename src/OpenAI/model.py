@@ -5,13 +5,28 @@ import openai
 class AiRequest:
 
     header = "Based on the output of the command `git diff`, could you please generate a pull request description using the provided information? Be concise.\nDescription must follow this format:\n"
+    model = "text-davinci-003"
     template_file_path = ".github/PULL_REQUEST_TEMPLATE.md"
 
-    def __init__(self, template="", template_file_path=AiRequest.template_path, header=AiRequest.header, model="text-davinci-003"):
+    def __init__(self, template, template_file_path, header, model):
+        self.__template = template
+        self.__template_file_path = template_file_path
         self.__header = header
         self.__model = model
-        self.__template = template
 
+    @staticmethod
+    def _template(template, template_file_path):
+        if template:
+            return template
+        if 
+
+        try:
+            with open(template_file_path, "r") as file:
+                return file.read()
+        except FileNotFoundError:
+            print("File not found.")
+        except IOError:
+            print("Error reading the file.")
 
 # Ability to specify, path to PULL_REQUEST_TEMPLATE
 # A default format
