@@ -31,7 +31,12 @@ def main():
     Returns:
         None
     """
-    config = parse.Yaml('config.yaml').conf
+    actionpath = os.environ.get('GITHUB_ACTION_PATH')
+    if actionpath:
+        yamlfile = f"{path}/src/config.yaml"
+    else:
+        yamlfile = 'config.yaml'
+    config = parse.Yaml(yamlfile).conf
     logs.init(config)
     env = preflight.Env(config)
 
