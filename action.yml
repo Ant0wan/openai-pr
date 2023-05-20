@@ -21,11 +21,11 @@ inputs:
     description: 'Intro phrase giving context to the model'
     required: false
     default: "Based on the output of the command `git diff`, could you please generate a pull request description using the provided information? Be concise. Description must follow this format:\n"
-  api-key:
+  apikey:
     description: 'OpenAI API key'
     required: true
     default: ""
-  github-token:
+  githubtoken:
     description: 'Github Token'
     required: true
     default: ""
@@ -54,5 +54,5 @@ runs:
         INPUT_TEMPLATE_FILEPATH: ${{ inputs.template-filepath }}
         INPUT_HEADER: ${{ inputs.header }}
         INPUT_MODEL: ${{ inputs.model }}
-        OPENAI_API_KEY: ${{ inputs.api-key }}
-        GH_TOKEN: ${{ inputs.github-token }}
+        OPENAI_API_KEY: ${{ inputs.apikey }}
+        GH_TOKEN: ${{ inputs.githubtoken }}
