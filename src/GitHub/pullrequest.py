@@ -28,6 +28,7 @@ import logging
 from github import Github
 
 import sys
+import os
 
 class PullRequest:
     """
