@@ -11,7 +11,7 @@ import configuration.logs as logs
 import configuration.parse as parse
 import configuration.preflight as preflight
 import OpenAI.model as model
-import GitHub.gh as gh
+import GitHub.pullrequest as pr
 import GitHub.outputs as outputs
 
 def main():
@@ -20,8 +20,8 @@ def main():
     env = preflight.Env(config)
 
     github_token = env.vars['GITHUB_TOKEN']
-    pr = gh.get_pull_request(github_token)
-    logging.info(pr)
+    pullrequest = pr.PullRequest(github_token)
+    logging.info(pullrequest)
 #    pr_diff = gh.get_pull_request_diff(pr)
 #    print(pr_diff)
 #    #description = model.generate_pull_request_description(pr_diff)
