@@ -43,7 +43,7 @@ def main():
     #            template = file.read()
     #    else:
     #        exit('ERROR: specify either template or filepath')
-    print(gh.get_pull_request_number().number)
+    print(gh.get_pull_request_diff())
 #    input_str = "key hey key"
 #    output = model.generate_pull_request_description(input_str)
 #    set_action_outputs({"text": output})

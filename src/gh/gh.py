@@ -1,4 +1,6 @@
+import requests
 import subprocess
+
 from github import Github
 
 
@@ -22,7 +24,7 @@ def get_owner_and_repo():
     return owner, repo
 
 
-def get_pull_request_number():
+def get_pull_request():
     g = Github()
     branch_name = get_current_branch()
     owner, repo = get_owner_and_repo()
@@ -38,9 +40,12 @@ def get_pull_request_number():
 
 
 def get_pull_request_diff():
-    pull_request = get_pull_request_number()
+    pull_request = get_pull_request()
+
     if pull_request is None:
         return "No open pull request found for the current branch."
     else:
-        diff = pull_request.diff()
-        return diff
+        diff_url = pull_request.diff_url
+        response = requests.get(diff_url)
+        diff_content = response.text
+        return diff_content
