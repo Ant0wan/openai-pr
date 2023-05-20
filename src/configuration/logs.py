@@ -1,12 +1,13 @@
 import logging
-import logging.config
 
 
-class Logger:
-
-    def __init__(self, config: dict):
-        self.__profile = config['logs']['profile']
-        self.__logging = config['logs']['logging']
-        logging.config.fileConfig(self.__logging)
-        logger = logging.getLogger(self.__profile)
-        logging.debug("Logger profile: %s", self.__profile)
+def init(config: dict):
+    format = '[%(asctime)s] %(levelname)-7s %(message)s'
+    datefmt = '%Y-%m-%d %H:%M:%S'
+    if config['logs']['profile'] == 'action':
+        logging.basicConfig(level=logging.INFO, format=format, datefmt=datefmt)
+    else:
+        logging.basicConfig(
+            level=logging.DEBUG,
+            format=format,
+            datefmt=datefmt)

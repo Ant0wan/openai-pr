@@ -17,7 +17,7 @@ import GitHub.outputs as outputs
 
 def main():
     config = parse.Yaml('config.yaml').conf
-    logger = logs.Logger(config)
+    logs.init(config)
     env = preflight.Env(config)
 
     github_token = env.vars['GITHUB_TOKEN']
