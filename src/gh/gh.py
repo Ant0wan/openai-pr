@@ -74,15 +74,17 @@ def get_pull_request():
         return pr
 
 
-def get_pull_request_diff():
+def get_pull_request_diff(pull_request):
     """
-    Retrieves the diff content of the open pull request associated with the current branch.
+    Retrieve the diff content of a pull request.
+
+    Args:
+        pull_request (PullRequest): The pull request object.
 
     Returns:
-        str: The diff content of the open pull request, or a message if no pull request is found.
+        str: The diff content of the pull request.
+            If no open pull request is found for the current branch, a message indicating the absence of a pull request.
     """
-    pull_request = get_pull_request()
-
     if pull_request is None:
         return "No open pull request found for the current branch."
     else:
