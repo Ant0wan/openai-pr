@@ -7,7 +7,6 @@ class AiRequest:
 
     header = "Based on the output of the command `git diff`, could you please generate a pull request description using the provided information? Be concise.\nDescription must follow this format:\n"
     model = "text-davinci-003"
-    template_file_path = ".github/PULL_REQUEST_TEMPLATE.md"
 
     def __init__(self, template, template_file_path, header, model):
         self.__template = self._template(template, template_file_path)
@@ -30,14 +29,6 @@ Model: {self.__model}"
                     return file.read()
             except FileNotFoundError:
                 print("Template file not found.")
-            except IOError:
-                print("Error reading the file.")
-        else:
-            try:
-                with open(AiRequest.template_file_path, "r") as file:
-                    return file.read()
-            except FileNotFoundError:
-                print("No template file found.")
             except IOError:
                 print("Error reading the file.")
 
