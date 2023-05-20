@@ -1,11 +1,12 @@
 ---
 preflights:
   env:
+    - INPUT_TEMPLATE
+    - INPUT_TEMPLATE_FILEPATH
+    - INPUT_HEADER
+    - INPUT_MODEL
+    - OPENAI_API_KEY
     - GITHUB_TOKEN
-    - FORMAT
-    - MODEL
-    - INTRO_WRAP
-    - INTRO_FMT
 logs:
   logging: 'configuration/logging.conf'
   profile: dev  # choose(dev|prod)

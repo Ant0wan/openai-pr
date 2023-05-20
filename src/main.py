@@ -3,60 +3,44 @@
 This module generates a pull request description using
 the OpenAI GPT-3.5 language model.
 """
+import logging
 import os
 import sys
 
-import configuration.logger as logger
-import configuration.parser as parser
-import configuration.preflights as preflights
-import ai.model as model
-import gh.gh as gh
-
-
-def set_action_outputs(output_pairs):
-    """Sets the GitHub Action outputs if running as a GitHub Action,
-    and otherwise logs these to terminal if running in CLI mode. Note
-    that if the CLI mode is used within a GitHub Actions
-    workflow, it will be treated the same as GitHub Actions mode.
-
-    Keyword arguments:
-    output_pairs - Dictionary of outputs with values
-    """
-    if "GITHUB_OUTPUT" in os.environ:
-        with open(os.environ["GITHUB_OUTPUT"], "a") as f:
-            for key, value in output_pairs.items():
-                print("{0}={1}".format(key, value), file=f)
-    else:
-        for key, value in output_pairs.items():
-            print("{0}={1}".format(key, value))
+import configuration.logs as logs
+import configuration.parse as parse
+import configuration.preflight as preflight
+import OpenAI.model as model
+import GitHub.pullrequest as pr
+import GitHub.outputs as outputs
 
 
 def main():
-    #    template_content = os.getenv('INPUT_TEMPLATE_CONTENT')
-    #    template_filepath = os.getenv('INPUT_TEMPLATE_FILEPATH')
-    #    if template_content and template_filepath:
-    #        exit('ERROR: cannot specify both template and filepath')
-    #    elif template_content:
-    #        template = template_content
-    #    elif template_filepath:
-    #        with open(template_filepath, 'r') as file:
-    #            template = file.read()
-    #    else:
-    #        exit('ERROR: specify either template or filepath')
-    url = gh.get_repository_url()
-    input_str = gh.get_diff(url)
-    input_str = "key hey key"
-    output = model.generate_pull_request_description(input_str)
-    set_action_outputs({"text": output})
-#    print(f"text={output}")
-# - name: Save state
-# run: echo "{name}={value}" >> $GITHUB_STATE
-# - name: Set output
-# run: echo "text={value}" >> $GITHUB_OUTPUT
-#
+    config = parse.Yaml('config.yaml').conf
+    logger = logs.Logger(config)
+    env = preflight.Env(config)
 
-#    access_token = "your_access_token_here"
-#    gh.print_user_repos(access_token)
+    github_token = env.vars['GITHUB_TOKEN']
+    pullrequest = pr.PullRequest(github_token)
+    logging.info(pullrequest)
+
+    patch = pullrequest.diff()
+    logging.debug(patch)
+
+    ai = model.AiRequest(
+        env.vars['OPENAI_API_KEY'],
+        env.vars['INPUT_TEMPLATE'],
+        env.vars['INPUT_TEMPLATE_FILEPATH'],
+        env.vars['INPUT_HEADER'],
+        env.vars['INPUT_MODEL']
+    )
+    logging.debug(ai)
+    description = ai.generate_description(patch)
+
+#    #print(f"text={description}")
+#    print(pr.number)
+#    description="hey!"
+#    gh.change_pull_request_description(pr.number, description)
 
 
 if __name__ == '__main__':

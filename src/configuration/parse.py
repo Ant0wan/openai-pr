@@ -2,20 +2,6 @@ import yaml
 from yaml.loader import SafeLoader
 
 
-# ---
-# preflights:
-#  env:
-#    - GITHUB_TOKEN
-#    - GITHUB_TOKEN
-#    - FORMAT
-#    - MODEL
-#    - INTRO_WRAP
-#    - INTRO_FMT
-# logs:
-#  logging: 'configuration/logging.conf'
-#  profile: dev  # choose(dev|prod)
-
-
 class Yaml:
 
     def __init__(self, yamlfile: str):
