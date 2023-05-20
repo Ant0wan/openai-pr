@@ -53,4 +53,4 @@ runs:
         INPUT_HEADER: ${{ inputs.header }}
         INPUT_MODEL: ${{ inputs.model }}
         OPENAI_API_KEY: ${{ inputs.api-key }}
-        GITHUB_TOKEN: ${{ inputs.github-token }}
+        GH_TOKEN: ${{ inputs.github-token }}

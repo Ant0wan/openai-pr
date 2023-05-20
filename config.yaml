@@ -6,7 +6,7 @@ preflights:
     - INPUT_HEADER
     - INPUT_MODEL
     - OPENAI_API_KEY
-    - GITHUB_TOKEN
+    - GH_TOKEN
 logs:
   logging: 'configuration/logging.conf'
   profile: action  # choose(dev|action)
