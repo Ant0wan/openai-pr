@@ -28,7 +28,6 @@ inputs:
   github-token:
     description: 'Github Token'
     required: true
-    default: ""
 runs:
   using: 'composite'
   steps:
@@ -51,4 +50,4 @@ runs:
         INPUT_HEADER: ${{ inputs.header }}
         INPUT_MODEL: ${{ inputs.model }}
         OPENAI_API_KEY: ${{ inputs.api-key }}
-        GH_TOKEN: ${{ inputs.github-token }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
