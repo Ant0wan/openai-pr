@@ -23,6 +23,7 @@ import OpenAI.model as model
 import GitHub.pullrequest as pr
 import GitHub.outputs as outputs
 
+import subprocess
 
 def main():
     """
@@ -41,6 +42,9 @@ def main():
     env = preflight.Env(config)
 
     github_token = env.vars['GITHUB_TOKEN']
+    raise subprocess.check_output(
+            ['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip().decode('utf-8')
+
     pullrequest = pr.PullRequest(github_token)
     logging.info(pullrequest)
 
