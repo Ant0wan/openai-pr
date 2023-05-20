@@ -42,8 +42,9 @@ def main():
     env = preflight.Env(config)
 
     github_token = env.vars['GITHUB_TOKEN']
-    raise subprocess.check_output(
+    git = subprocess.check_output(
             ['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip().decode('utf-8')
+    print(f"{git}", file=sys.stderr)
 
     pullrequest = pr.PullRequest(github_token)
     logging.info(pullrequest)
