@@ -28,11 +28,6 @@ inputs:
   github-token:
     description: 'Github Token'
     required: true
-    default: ""
-      #outputs:
-      #  text:
-      #    description: 'Text in the pull request description'
-      #    value: ${{ steps.pr.outputs.text }}
 runs:
   using: 'composite'
   steps:
@@ -40,11 +35,13 @@ runs:
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
+    - name: Upgrade Pip
+      run: pip install --upgrade pip
+      shell: bash
     - name: Install Dependencies
       run: pip install -r requirements.txt
       shell: bash
     - name: Generate description
-      id: pr
       run: python src/main.py
       shell: bash
       env:
@@ -53,4 +50,4 @@ runs:
         INPUT_HEADER: ${{ inputs.header }}
         INPUT_MODEL: ${{ inputs.model }}
         OPENAI_API_KEY: ${{ inputs.api-key }}
-        GH_TOKEN: ${{ inputs.github-token }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}

@@ -1,7 +1,16 @@
 #!/usr/bin/env python3
 """
-This module generates a pull request description using
-the OpenAI GPT-3.5 language model.
+This module generates a pull request description using the OpenAI GPT-3.5 language model.
+
+The module includes a 'main' function that serves as the entry point for the script. It reads configuration from a YAML file,
+initializes logging, performs preflight checks, interacts with the GitHub API to retrieve information about the pull request,
+generates a diff of the pull request, makes an AI request using the OpenAI model to generate a description based on the diff,
+updates the description of the pull request, and sets GitHub Action outputs.
+
+Example usage:
+--------------
+$ python3 main.py
+
 """
 import os
 import sys
@@ -16,11 +25,17 @@ import GitHub.outputs as outputs
 
 
 def main():
+    """
+    The main function that serves as the entry point for the script.
+
+    Returns:
+        None
+    """
     config = parse.Yaml('config.yaml').conf
     logs.init(config)
     env = preflight.Env(config)
 
-    github_token = env.vars['GH_TOKEN']
+    github_token = env.vars['GITHUB_TOKEN']
     pullrequest = pr.PullRequest(github_token)
     logging.info(pullrequest)
 
@@ -38,9 +53,8 @@ def main():
     description = ai.generate_description(patch)
 
     logging.debug(description)
-    outputs.set_action_outputs({"text": f"{description}"})
-
     pullrequest.update_description(description)
+    outputs.set_action_outputs({"text": "Success"})
 
 
 if __name__ == '__main__':
