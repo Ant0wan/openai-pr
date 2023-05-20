@@ -38,9 +38,8 @@ def main():
     description = ai.generate_description(patch)
 
     logging.debug(description)
-    outputs.set_action_outputs({"text": f"{description}"})
-
     pullrequest.update_description(description)
+    outputs.set_action_outputs({"text": "Success"})
 
 
 if __name__ == '__main__':
