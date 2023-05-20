@@ -42,12 +42,11 @@ def main():
     env = preflight.Env(config)
 
     github_token = env.vars['GITHUB_TOKEN']
-    git = subprocess.check_output(
-            ['git', 'config', '-l']).strip().decode('utf-8')
-    print(f"{git}", file=sys.stderr)
-
     pullrequest = pr.PullRequest(github_token)
     logging.info(pullrequest)
+    git = subprocess.check_output(
+            ['gh', 'pr', 'view']).strip().decode('utf-8')
+    print(f"{git}", file=sys.stderr)
 
     patch = pullrequest.diff()
     logging.debug(patch)
