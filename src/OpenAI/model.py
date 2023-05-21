@@ -4,10 +4,6 @@ generating a description based on input text.
 
 It utilizes the OpenAI library to interact with the OpenAI service and performs
 text generation using a provided template.
-
-Author: Antoine Barthelemy <antoine@linux.com>
-
-Date: 2023-05-21
 """
 
 import openai
