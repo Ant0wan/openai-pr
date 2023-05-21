@@ -151,12 +151,24 @@ PullRequest: {self.__pulls}"
             return pr
 
     def diff(self):
-        pr = self.__pulls
-        logging.info(pr)
-        diff = pr.diff()
+        """
+        Get the diff of the pull request.
+
+        Returns:
+            str: The diff of the pull request.
+
+        Raises:
+            requests.exceptions.RequestException: If the request to retrieve the diff fails.
+        """
+        diff_url = self.__pulls.diff_url
+        logging.info(diff_url)
+
+        access_token = os.environ.get('GITHUB_TOKEN')
+        headers = {'Authorization': f'token {access_token}'}
+        response = requests.get(diff_url, headers=headers)
         logging.info("====Reponse:")
-        logging.info(diff)
-        return diff
+        logging.info(response)
+        return response.text
 
     def update_description(self, new_description):
         """
