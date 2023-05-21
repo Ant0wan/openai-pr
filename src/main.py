@@ -63,13 +63,7 @@ def main():
     logging.debug(patch)
 
     # Create an AiRequest object for OpenAI
-    ai = model.AiRequest(
-        env.vars['OPENAI_API_KEY'],
-        env.vars['INPUT_TEMPLATE'],
-        env.vars['INPUT_TEMPLATE_FILEPATH'],
-        env.vars['INPUT_HEADER'],
-        env.vars['INPUT_MODEL']
-    )
+    ai = model.AiRequest(env)
 
     # Log the AiRequest object
     logging.debug(ai)

@@ -33,7 +33,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - run: pip install ${{ matrix.linter }}
-      - run: find src/ -type d -exec ${{ matrix.cmd }} {} \;
+      - run: ${{ matrix.cmd }} **
   requirements:
     needs: [lint]
     runs-on: ubuntu-latest

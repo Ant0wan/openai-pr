@@ -1,3 +1,22 @@
+"""
+This file contains the Env class, which is an environment variable loader.
+
+The Env class is used to load and check environment variables based
+on a provided configuration.
+The loaded environment variables can be accessed through the 'vars' property.
+
+Example usage:
+--------------
+config = {
+    'preflights': {
+        'env': ['ENV_VAR_1', 'ENV_VAR_2']
+    }
+}
+
+env_loader = Env(config)
+variables = env_loader.vars
+"""
+
 import os
 import logging
 
@@ -6,31 +25,36 @@ class Env:
     """
     An environment variable loader class.
 
-    The 'Env' class can be used to load and check environment variables based on a provided configuration.
-    The loaded environment variables can be accessed through the 'vars' property.
+    The 'Env' class can be used to load and check environment variables based
+    on a provided configuration. The loaded environment variables can be
+    accessed through the 'vars' property.
 
-    Example usage:
-    --------------
-    config = {
-        'preflights': {
-            'env': ['ENV_VAR_1', 'ENV_VAR_2']
-        }
-    }
+    Args:
+        config (dict): A dictionary containing the configuration parameters.
 
-    env_loader = Env(config)
-    variables = env_loader.vars
+    Attributes:
+        __vars (dict): A dictionary containing the loaded env variables.
+
+    Methods:
+        __init__(self, config): Initialize the environment variable loader with
+                                the provided configuration.
+        _preflight_checks(var_names): Perform preflight checks to ensure that
+                            all specified environment variables are present.
+        vars: Get the loaded environment variables as a dictionary.
     """
 
     def __init__(self, config: dict):
         """
-        Initialize the environment variable loader with the provided configuration.
+        Initialize the environment variable loader with
+        the provided configuration.
 
-        The configuration dictionary should contain a 'preflights' key, which itself should contain an 'env'
-        key specifying the required environment variables. The 'Env' class performs preflight checks to ensure
-        that all the specified environment variables are present.
+        The configuration dictionary should contain a 'preflights' key, which
+        itself should contain an 'env' key specifying the required environment
+        variables. The 'Env' class performs preflight checks to ensure that all
+        the specified environment variables are present.
 
         Args:
-            config (dict): A dictionary containing the configuration parameters.
+            config (dict): A dictionary containing configuration parameters.
 
         Returns:
             None
@@ -39,10 +63,20 @@ class Env:
             config['preflights']['env'])
         logging.debug(self.__vars)
 
+    def __str__(self):
+        """
+        Returns a string representation of the object.
+
+        Returns:
+            str: A string representation of the object, formatted as "{vars}".
+        """
+        return f"{self.__vars}"
+
     @staticmethod
     def _preflight_checks(var_names: list) -> dict:
         """
-        Perform preflight checks to ensure that all the specified environment variables are present.
+        Perform preflight checks to ensure that all the specified
+        environment variables are present.
 
         Args:
             var_names (list): A list of environment variable names.
