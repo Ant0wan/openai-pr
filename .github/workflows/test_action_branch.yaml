@@ -1,20 +1,22 @@
 name: Test
+
 on:
-  push:
+  pull_request:
+    types:
+      - opened
+      - synchronize
 
 permissions:
   pull-requests: write
   contents: read
 
 jobs:
-  test:
+  branch-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Generate a PR Description
+      - uses: actions/checkout@v3
+      - uses: ./
         id: pr
-        uses: ./
         with:
           api-key: ${{ secrets.OPENAI_API_KEY }}
         env:
