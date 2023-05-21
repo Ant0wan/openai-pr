@@ -1,27 +1,33 @@
 #!/usr/bin/env python3
 """
-This module generates a pull request description using the OpenAI GPT-3.5 language model.
+This module generates a pull request description using the OpenAI GPT-3.5
+language model.
 
-The module includes a 'main' function that serves as the entry point for the script. It reads configuration from a YAML file,
-initializes logging, performs preflight checks, interacts with the GitHub API to retrieve information about the pull request,
-generates a diff of the pull request, makes an AI request using the OpenAI model to generate a description based on the diff,
-updates the description of the pull request, and sets GitHub Action outputs.
+The module includes a 'main' function that serves as the entry point for
+the script. It reads configuration from a YAML file, initializes logging,
+performs preflight checks, interacts with the GitHub API to retrieve
+information about the pull request, generates a diff of the pull request,
+makes an AI request using the OpenAI model to generate a description
+based on the diff, updates the description of the pull request,
+and sets GitHub Action outputs.
 
 Example usage:
 --------------
 $ python3 main.py
 
 """
+
 import os
-import sys
 import logging
 
-import configuration.logs as logs
-import configuration.parse as parse
-import configuration.preflight as preflight
-import OpenAI.model as model
+from configuration import logs
+from configuration import parse
+from configuration import preflight
+
+from OpenAI import model
+
+from GitHub import outputs
 import GitHub.pullrequest as pr
-import GitHub.outputs as outputs
 
 
 def main():
@@ -63,13 +69,13 @@ def main():
     logging.debug(patch)
 
     # Create an AiRequest object for OpenAI
-    ai = model.AiRequest(env)
+    air = model.AiRequest(env)
 
     # Log the AiRequest object
-    logging.debug(ai)
+    logging.debug(air)
 
     # Generate a description using the diff content
-    description = ai.generate_description(patch)
+    description = air.generate_description(patch)
 
     # Log the generated description
     logging.debug(description)

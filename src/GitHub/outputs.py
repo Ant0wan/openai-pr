@@ -1,9 +1,12 @@
 """
-This module provides functions for setting outputs in GitHub Actions or logging to the terminal in CLI mode.
+This module provides functions for setting outputs in GitHub Actions or logging
+to the terminal in CLI mode.
 
-The module includes a function, 'set_action_outputs', that sets the GitHub Action outputs if running as a
-GitHub Action. If running in CLI mode, the function logs the outputs to the terminal. Note that if the CLI
-mode is used within a GitHub Actions workflow, it will be treated the same as GitHub Actions mode.
+The module includes a function, 'set_action_outputs', that sets the
+GitHub Action outputs if running as a GitHub Action. If running in CLI mode,
+the function logs the outputs to the terminal. Note that if the CLI mode is
+used within a GitHub Actions workflow, it will be treated the same as
+GitHub Actions mode.
 
 Example usage:
 --------------
@@ -15,8 +18,8 @@ output_pairs = {
 set_action_outputs(output_pairs)
 
 """
+
 import os
-import logging
 
 
 def set_action_outputs(output_pairs):
@@ -33,9 +36,9 @@ def set_action_outputs(output_pairs):
         None
     """
     if "GITHUB_OUTPUT" in os.environ:
-        with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+        with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as file:
             for key, value in output_pairs.items():
-                print("{0}={1}".format(key, value), file=f)
+                print(f"{key}={value}", file=file)
     else:
         for key, value in output_pairs.items():
-            print("{0}={1}".format(key, value))
+            print(f"{key}={value}")
