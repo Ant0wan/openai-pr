@@ -151,21 +151,12 @@ PullRequest: {self.__pulls}"
             return pr
 
     def diff(self):
-        """
-        Get the diff of the pull request.
-
-        Returns:
-            str: The diff of the pull request.
-
-        Raises:
-            requests.exceptions.RequestException: If the request to retrieve the diff fails.
-        """
-        diff_url = self.__pulls.diff_url
-        logging.info(diff_url)
-        response = requests.get(diff_url)
+        pr = self.__pulls
+        logging.info(pr)
+        diff = pr.diff()
         logging.info("====Reponse:")
-        logging.info(response)
-        return response.text
+        logging.info(diff)
+        return diff
 
     def update_description(self, new_description):
         """
