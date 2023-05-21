@@ -151,8 +151,8 @@ PullRequest: {self.__pulls}"
         logging.info(files)
         diff_content = ""
         for file in files:
-            logging.info("===file===")
-            logging.info(file)
+            logging.info("===file.patch===")
+            logging.info(file.patch)
             diff_content += file.patch
         return diff_content
 
