@@ -26,8 +26,8 @@ from configuration import preflight
 
 from OpenAI import model
 
-from GitHub import outputs
-import GitHub.pullrequest as pr
+from ghkit import outputs
+import ghkit.pullrequest as pr
 
 
 def main():
