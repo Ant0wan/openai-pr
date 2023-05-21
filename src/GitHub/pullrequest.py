@@ -1,10 +1,12 @@
 """
 This module provides a class for interacting with GitHub Pull Requests.
 
-The module includes a class, 'PullRequest', that can be used to work with GitHub Pull Requests. The 'PullRequest'
-class requires a GitHub token for authentication. The class provides methods for retrieving the repository URL,
-fetching the repository, getting the current branch, retrieving open pull requests for the branch, getting the
-diff of a pull request, and updating the description of a pull request.
+The module includes a class, 'PullRequest', that can be used to work with
+GitHub Pull Requests. The 'PullRequest' class requires a GitHub token for
+authentication. The class provides methods for retrieving the repository URL,
+fetching the repository, getting the current branch, retrieving open pull
+requests for the branch, getting the diff of a pull request, and updating
+the description of a pull request.
 
 Example usage:
 --------------
@@ -22,8 +24,8 @@ new_description = "Updated pull request description"
 pull_request.update_description(new_description)
 
 """
+
 import subprocess
-import logging
 from github import Github
 
 
@@ -31,9 +33,11 @@ class PullRequest:
     """
     A class for interacting with GitHub Pull Requests.
 
-    The 'PullRequest' class requires a GitHub token for authentication. It provides methods for retrieving the
-    repository URL, fetching the repository, getting the current branch, retrieving open pull requests for the
-    branch, getting the diff of a pull request, and updating the description of a pull request.
+    The 'PullRequest' class requires a GitHub token for authentication.
+    It provides methods for retrieving the repository URL, fetching the
+    repository, getting the current branch, retrieving open pull requests for
+    the branch, getting the diff of a pull request, and updating
+    the description of a pull request.
 
     Example usage:
     --------------
@@ -96,7 +100,7 @@ PullRequest: {self.__pulls}"
         return remote.replace(".git", "")
 
     @staticmethod
-    def _repository(g, url):
+    def _repository(ghinfo, url):
         """
         Fetch the repository object from GitHub.
 
@@ -113,7 +117,7 @@ PullRequest: {self.__pulls}"
         parts = url.split('/')
         owner = parts[-2]
         repo = parts[-1]
-        return g.get_repo(f'{owner}/{repo}')
+        return ghinfo.get_repo(f'{owner}/{repo}')
 
     @staticmethod
     def _pulls(repo, branch):
@@ -125,22 +129,22 @@ PullRequest: {self.__pulls}"
             branch (str): The branch name.
 
         Returns:
-            PullRequest: The first open pull request for the branch, or None if no open pull requests exist.
+            PullRequest: The first open pull request for the branch, or None
+                         if no open pull requests exist.
         """
         pull_requests = repo.get_pulls(
             state='open', head=f'{repo.owner.login}:{branch}')
         if pull_requests.totalCount == 0:
             return None
-        else:
-            pr = pull_requests[0]
-            return pr
+        return pull_requests[0]
 
     def diff(self):
         """
         Retrieves the diff content for all files in the pull request.
 
         Returns:
-            str: The concatenated diff content for all files in the pull request.
+            str: The concatenated diff content for all files in the
+                 pull request.
         """
         files = self.__pulls.get_files()
         diff_content = ""
