@@ -25,8 +25,8 @@ pull_request.update_description(new_description)
 
 """
 
-import logging
 import subprocess
+
 from github import Github
 
 
@@ -148,12 +148,8 @@ PullRequest: {self.__pulls}"
                  pull request.
         """
         files = self.__pulls.get_files()
-        logging.info(files.__dir__())
         diff_content = ""
         for file in files:
-            logging.info("===file.patch===")
-            logging.info(file.__dir__())
-            logging.info(file.patch)
             if file.patch:
                 diff_content += file.patch
         return diff_content
