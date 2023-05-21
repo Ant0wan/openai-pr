@@ -148,11 +148,11 @@ PullRequest: {self.__pulls}"
                  pull request.
         """
         files = self.__pulls.get_files()
-        logging.info(files)
+        logging.info(files.__dir__())
         diff_content = ""
         for file in files:
             logging.info("===file.patch===")
-            logging.info(file.patch)
+            logging.info(file.__dir__())
             diff_content += file.patch
         return diff_content
 
