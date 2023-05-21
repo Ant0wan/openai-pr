@@ -22,8 +22,6 @@ new_description = "Updated pull request description"
 pull_request.update_description(new_description)
 
 """
-import os
-import requests
 import subprocess
 import logging
 from github import Github
@@ -53,7 +51,7 @@ class PullRequest:
     pull_request.update_description(new_description)
     """
 
-    def __init__(self, github_token: str):
+    def __init__(self, github_token: str, env):
         """
         Initialize the PullRequest object with the provided GitHub token.
 
@@ -66,7 +64,7 @@ class PullRequest:
         self.__g = Github(github_token)
         self.__url = self._repository_url()
         self.__repository = self._repository(self.__g, self.__url)
-        self.__branch = self._branch()
+        self.__branch = env.vars['GITHUB_BRANCH']
         self.__pulls = self._pulls(self.__repository, self.__branch)
 
     def __str__(self):
@@ -118,19 +116,6 @@ PullRequest: {self.__pulls}"
         return g.get_repo(f'{owner}/{repo}')
 
     @staticmethod
-    def _branch():
-        """
-        Get the current branch name.
-
-        Returns:
-            str: The current branch name.
-
-        Raises:
-            subprocess.CalledProcessError: If the 'git' command fails.
-        """
-        return os.environ.get('GITHUB_BRANCH')
-
-    @staticmethod
     def _pulls(repo, branch):
         """
         Retrieve open pull requests for the specified branch.
@@ -151,12 +136,16 @@ PullRequest: {self.__pulls}"
             return pr
 
     def diff(self):
+        """
+        Retrieves the diff content for all files in the pull request.
+
+        Returns:
+            str: The concatenated diff content for all files in the pull request.
+        """
         files = self.__pulls.get_files()
-        logging.debug(files)
         diff_content = ""
         for file in files:
             diff_content += file.patch
-        logging.debug(diff_content)
         return diff_content
 
     def update_description(self, new_description):

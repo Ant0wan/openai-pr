@@ -23,7 +23,6 @@ import OpenAI.model as model
 import GitHub.pullrequest as pr
 import GitHub.outputs as outputs
 
-import subprocess
 
 def main():
     """
@@ -43,12 +42,10 @@ def main():
 
     github_token = env.vars['GITHUB_TOKEN']
     pullrequest = pr.PullRequest(github_token)
-    logging.info(pullrequest)
+    logging.debug(pullrequest)
 
-    logging.info("before pull request")
     patch = pullrequest.diff()
-    #logging.debug(patch)
-    logging.info(patch)
+    logging.debug(patch)
 
     ai = model.AiRequest(
         env.vars['OPENAI_API_KEY'],
@@ -58,9 +55,10 @@ def main():
         env.vars['INPUT_MODEL']
     )
     logging.debug(ai)
-    description = ai.generate_description(patch)
 
+    description = ai.generate_description(patch)
     logging.debug(description)
+
     pullrequest.update_description(description)
     outputs.set_action_outputs({"text": "Success"})
 

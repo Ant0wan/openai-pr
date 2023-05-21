@@ -7,6 +7,8 @@ preflights:
     - INPUT_MODEL
     - OPENAI_API_KEY
     - GITHUB_TOKEN
+    - GITHUB_ACTION_PATH
+    - GITHUB_BRANCH
 logs:
   logging: 'configuration/logging.conf'
   profile: action  # choose(dev|action)
