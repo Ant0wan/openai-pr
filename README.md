@@ -40,7 +40,7 @@ on:
 permissions: write-all
 
 jobs:
-  description:
+  pr:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
