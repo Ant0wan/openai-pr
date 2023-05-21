@@ -29,9 +29,26 @@ The generated pull request description.
 ## Example Usage
 
 ```yaml
-uses: username/repo-name@v1
-with:
-  api_key: ${{ secrets.OPENAI_API_KEY }}
+name: OpenAI PR Description Generator
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+permissions: write-all
+
+jobs:
+  description:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: Ant0wan/openai-pr@0.0.12
+        with:
+          api-key: ${{ secrets.OPENAI_API_KEY }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ## How It Works
