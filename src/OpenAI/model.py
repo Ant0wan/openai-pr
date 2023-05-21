@@ -1,95 +1,65 @@
 """
-This module provides a class for making AI requests using OpenAI.
+This file contains the AiRequest class, which represents an AI request for generating a description
+based on input text.
 
-The module includes a class, 'AiRequest', that can be used to make AI requests using OpenAI.
-The 'AiRequest' class requires a key for authentication, a template or a template file path,
-a header, and a model. It provides a method for generating descriptions based on the provided text.
+It utilizes the OpenAI library to interact with the OpenAI service and performs text generation
+using a provided template.
 
-Example usage:
---------------
-key = "your_openai_key"
-template = "Your template text"
-template_file_path = "path_to_template_file.txt"
-header = "Your header text"
-model = "your_model_name"
+Author: Antoine Barthelemy <antoine@linux.com>
 
-ai_request = AiRequest(key, template, template_file_path, header, model)
-
-# Generate description
-text = "Your text"
-description = ai_request.generate_description(text)
-
-# Print information about the AI request
-print(ai_request)
-
+Date: 2023-05-21
 """
-import os
-import sys
+
 import openai
-import logging
 
 
 class AiRequest:
     """
-    A class for making AI requests using OpenAI.
+    Represents an AI request for generating a description based on input text.
 
-    The 'AiRequest' class requires a key for authentication, a template or a template file path,
-    a header, and a model.
-    It provides a method for generating descriptions based on the provided text.
+    Args:
+        env (object): The environment object containing the necessary variables.
 
-    Example usage:
-    --------------
-    key = "your_openai_key"
-    template = "Your template text"
-    template_file_path = "path_to_template_file.txt"
-    header = "Your header text"
-    model = "your_model_name"
+    Attributes:
+        __key (str): The API key for the OpenAI service.
+        __template (str): The template text used for generating descriptions.
+        __header (str): The header text appended to the template.
+        __model (str): The model used for generating descriptions.
 
-    ai_request = AiRequest(key, template, template_file_path, header, model)
-
-    # Generate description
-    text = "Your text"
-    description = ai_request.generate_description(text)
-
-    # Print information about the AI request
-    print(ai_request)
+    Methods:
+        __init__(self, env): Initializes the AiRequest object.
+        __str__(self): Returns a string representation of the AiRequest object.
+        _template(template, template_file_path): Retrieves the template text.
+        generate_description(text): Generates a description based on the provided text.
     """
 
-    def __init__(self, key, template, template_file_path, header, model):
+    def __init__(self, env):
         """
-        Initialize the AiRequest object with the provided key, template,
-        template file path, header, and model.
+        Initializes the AiRequest object.
 
         Args:
-            key (str): The OpenAI key for authentication.
-            template (str): The template text.
-            template_file_path (str): The file path of the template file.
-            header (str): The header text.
-            model (str): The name of the AI model.
-
-        Returns:
-            None
+            env (object): The environment object containing the necessary variables.
         """
-        self.__key = key
-        self.__template = self._template(template, template_file_path)
-        self.__header = header
-        self.__model = model
+        self.__key = env.vars['OPENAI_API_KEY']
+        self.__template = self._template(
+            env.vars['INPUT_TEMPLATE'],
+            env.vars['INPUT_TEMPLATE_FILEPATH'])
+        self.__header = env.vars['INPUT_HEADER']
+        self.__model = env.vars['INPUT_MODEL']
 
     def __str__(self):
         """
-        Return a string representation of the AiRequest object.
+        Returns a string representation of the AiRequest object.
 
         Returns:
             str: A string representation of the AiRequest object.
         """
-        return f"Template: {self.__template}, \
-Header: {self.__header}, \
-Model: {self.__model}"
+        return f"Template: {self.__template}, Header: {self.__header}, Model: {self.__model}"
 
     @staticmethod
     def _template(template, template_file_path):
         """
-        Get the template text either from the provided template or from a template file.
+        Retrieves the template text either from the provided template or from a template file.
 
         Args:
             template (str): The template text.
@@ -108,13 +78,14 @@ Model: {self.__model}"
             with open(template_file_path, "r", encoding="utf-8") as file:
                 return file.read()
         except FileNotFoundError as file_not_found_error:
-            raise FileNotFoundError("Template file not found.") from file_not_found_error
+            raise FileNotFoundError(
+                "Template file not found.") from file_not_found_error
         except IOError as io_error:
             raise IOError("Error reading the file.") from io_error
 
     def generate_description(self, text):
         """
-        Generate a description based on the provided text.
+        Generates a description based on the provided text.
 
         Args:
             text (str): The input text for generating the description.
