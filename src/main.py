@@ -60,7 +60,7 @@ def main():
     pullrequest = pr.PullRequest(github_token, env)
 
     # Log the PullRequest object
-    logging.debug(pullrequest)
+    logging.info(pullrequest)
 
     # Get the diff content for the pull request
     patch = pullrequest.diff()
