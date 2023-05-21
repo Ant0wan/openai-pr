@@ -24,10 +24,10 @@ from configuration import logs
 from configuration import parse
 from configuration import preflight
 
-from OpenAI import model
+from opnai import model
 
-from GitHub import outputs
-import GitHub.pullrequest as pr
+from ghkit import outputs
+import ghkit.pullrequest as pr
 
 
 def main():

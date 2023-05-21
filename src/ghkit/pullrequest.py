@@ -26,6 +26,7 @@ pull_request.update_description(new_description)
 """
 
 import subprocess
+
 from github import Github
 
 
@@ -149,7 +150,8 @@ PullRequest: {self.__pulls}"
         files = self.__pulls.get_files()
         diff_content = ""
         for file in files:
-            diff_content += file.patch
+            if file.patch:
+                diff_content += file.patch
         return diff_content
 
     def update_description(self, new_description):
