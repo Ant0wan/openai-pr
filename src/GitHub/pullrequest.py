@@ -161,7 +161,10 @@ PullRequest: {self.__pulls}"
             requests.exceptions.RequestException: If the request to retrieve the diff fails.
         """
         diff_url = self.__pulls.diff_url
+        logging.info(diff_url)
         response = requests.get(diff_url)
+        logging.info("====Reponse:")
+        logging.info(response)
         return response.text
 
     def update_description(self, new_description):

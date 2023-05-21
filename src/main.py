@@ -45,6 +45,7 @@ def main():
     pullrequest = pr.PullRequest(github_token)
     logging.info(pullrequest)
 
+    logging.info("before pull request")
     patch = pullrequest.diff()
     #logging.debug(patch)
     logging.info(patch)
