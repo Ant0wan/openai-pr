@@ -3,7 +3,8 @@ on:
   push:
 
 permissions:
-    pull-requests: write
+  pull-requests: write
+  contents: read
 
 jobs:
   test:
