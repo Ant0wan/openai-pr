@@ -24,7 +24,7 @@ from configuration import logs
 from configuration import parse
 from configuration import preflight
 
-from OpenAI import model
+from opnai import model
 
 from ghkit import outputs
 import ghkit.pullrequest as pr
@@ -60,13 +60,13 @@ def main():
     pullrequest = pr.PullRequest(github_token, env)
 
     # Log the PullRequest object
-    logging.info(pullrequest)
+    logging.debug(pullrequest)
 
     # Get the diff content for the pull request
     patch = pullrequest.diff()
 
     # Log the diff content
-    logging.info(patch)
+    logging.debug(patch)
 
     # Create an AiRequest object for OpenAI
     air = model.AiRequest(env)
