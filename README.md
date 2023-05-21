@@ -49,7 +49,7 @@ The **OpenAI PR Description Generator** action provides the following inputs:
 
 - `api-key` *(required)*: Your OpenAI API key. You can get one from the [OpenAI website](https://beta.openai.com/signup/).
 - `model` *(optional)*: Specifies the OpenAI model to use. Default value is "text-davinci-003".
-- `template *(optional)*: PR content template for OpenAI to understand what should be included in the pull request description. Default value is an empty string.
+- `template` *(optional)*: PR content template for OpenAI to understand what should be included in the pull request description. Default value is an empty string.
 - `template-filepath` *(optional)*: Path to the `PULL_REQUEST_TEMPLATE.md` file. Default value is `.github/PULL_REQUEST_TEMPLATE.md`.
 - `header` *(optional)*: Intro phrase that provides context to the model. Default value is `"Based on the output of the command 'git diff', could you please generate a pull request description using the provided information? Be concise. Description must follow this format:\n"`.
 
