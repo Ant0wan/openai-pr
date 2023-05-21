@@ -104,16 +104,12 @@ Model: {self.__model}"
             return template
         elif template_file_path:
             try:
-                # This path need to be absolute using git root dir path +
-                # .github/PULL_RE...
                 with open(template_file_path, "r") as file:
                     return file.read()
             except FileNotFoundError:
-                print("Template file not found.")
-                return " "  # should exit fail
+                raise FileNotFoundError("Template file not found.")
             except IOError:
-                print("Error reading the file.")
-                return " "  # should exit fail
+                raise IOError("Error reading the file.")
 
     def generate_description(self, text):
         """
