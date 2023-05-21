@@ -37,14 +37,16 @@ on:
       - opened
       - synchronize
 
-permissions: write-all
+permissions:
+  pull-requests: write
+  contents: read
 
 jobs:
-  pr:
+  pull-request:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: Ant0wan/openai-pr@0.0.12
+      - uses: Ant0wan/openai-pr@0.0.11
         with:
           api-key: ${{ secrets.OPENAI_API_KEY }}
         env:
