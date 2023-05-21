@@ -66,7 +66,7 @@ def main():
     patch = pullrequest.diff()
 
     # Log the diff content
-    logging.debug(patch)
+    logging.info(patch)
 
     # Create an AiRequest object for OpenAI
     air = model.AiRequest(env)
