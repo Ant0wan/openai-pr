@@ -1,9 +1,9 @@
 """
-This file contains the AiRequest class, which represents an AI request for generating a description
-based on input text.
+This file contains the AiRequest class, which represents an AI request for
+generating a description based on input text.
 
-It utilizes the OpenAI library to interact with the OpenAI service and performs text generation
-using a provided template.
+It utilizes the OpenAI library to interact with the OpenAI service and performs
+text generation using a provided template.
 
 Author: Antoine Barthelemy <antoine@linux.com>
 
@@ -18,7 +18,7 @@ class AiRequest:
     Represents an AI request for generating a description based on input text.
 
     Args:
-        env (object): The environment object containing the necessary variables.
+        env (object): The environment object containing the variables.
 
     Attributes:
         __key (str): The API key for the OpenAI service.
@@ -30,7 +30,7 @@ class AiRequest:
         __init__(self, env): Initializes the AiRequest object.
         __str__(self): Returns a string representation of the AiRequest object.
         _template(template, template_file_path): Retrieves the template text.
-        generate_description(text): Generates a description based on the provided text.
+        generate_description(text): Generates a description based on text.
     """
 
     def __init__(self, env):
@@ -38,7 +38,7 @@ class AiRequest:
         Initializes the AiRequest object.
 
         Args:
-            env (object): The environment object containing the necessary variables.
+            env (object): The environment object containing the variables.
         """
         self.__key = env.vars['OPENAI_API_KEY']
         self.__template = self._template(
@@ -54,12 +54,14 @@ class AiRequest:
         Returns:
             str: A string representation of the AiRequest object.
         """
-        return f"Template: {self.__template}, Header: {self.__header}, Model: {self.__model}"
+        return f"Template: {self.__template}, \
+Header: {self.__header}, Model: {self.__model}"
 
     @staticmethod
     def _template(template, template_file_path):
         """
-        Retrieves the template text either from the provided template or from a template file.
+        Retrieves the template text either from the provided template
+        or from a template file.
 
         Args:
             template (str): The template text.
