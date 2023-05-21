@@ -1,6 +1,6 @@
 #!/bin/sh
 set -o errexit
-# shellcheck source=env-01.sh
+# shellcheck source=dev/env-01.sh
 . "$1"
 
 FILE='short_commit_sha'
