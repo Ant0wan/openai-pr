@@ -31,22 +31,38 @@ def main():
     Returns:
         None
     """
+    # Retrieve the YAML configuration file path
     actionpath = os.environ.get('GITHUB_ACTION_PATH')
     if actionpath:
         yamlfile = f"{actionpath}/config.yaml"
     else:
         yamlfile = 'config.yaml'
+
+    # Parse the YAML configuration
     config = parse.Yaml(yamlfile).conf
+
+    # Initialize logging configuration
     logs.init(config)
+
+    # Perform preflight environment checks
     env = preflight.Env(config)
 
+    # Retrieve the GitHub token
     github_token = env.vars['GITHUB_TOKEN']
-    pullrequest = pr.PullRequest(github_token)
+
+    # Create a PullRequest object
+    pullrequest = pr.PullRequest(github_token, env)
+
+    # Log the PullRequest object
     logging.debug(pullrequest)
 
+    # Get the diff content for the pull request
     patch = pullrequest.diff()
+
+    # Log the diff content
     logging.debug(patch)
 
+    # Create an AiRequest object for OpenAI
     ai = model.AiRequest(
         env.vars['OPENAI_API_KEY'],
         env.vars['INPUT_TEMPLATE'],
@@ -54,12 +70,20 @@ def main():
         env.vars['INPUT_HEADER'],
         env.vars['INPUT_MODEL']
     )
+
+    # Log the AiRequest object
     logging.debug(ai)
 
+    # Generate a description using the diff content
     description = ai.generate_description(patch)
+
+    # Log the generated description
     logging.debug(description)
 
+    # Update the pull request description with the generated description
     pullrequest.update_description(description)
+
+    # Set the action outputs
     outputs.set_action_outputs({"text": "Success"})
 
 
