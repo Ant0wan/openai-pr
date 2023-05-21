@@ -153,7 +153,9 @@ PullRequest: {self.__pulls}"
         for file in files:
             logging.info("===file.patch===")
             logging.info(file.__dir__())
-            diff_content += file.patch
+            logging.info(file.patch)
+            if file.patch:
+                diff_content += file.patch
         return diff_content
 
     def update_description(self, new_description):
