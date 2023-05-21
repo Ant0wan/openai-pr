@@ -1,9 +1,9 @@
 """
 This module provides a class for making AI requests using OpenAI.
 
-The module includes a class, 'AiRequest', that can be used to make AI requests using OpenAI. The 'AiRequest' class
-requires a key for authentication, a template or a template file path, a header, and a model. It provides a method
-for generating descriptions based on the provided text.
+The module includes a class, 'AiRequest', that can be used to make AI requests using OpenAI.
+The 'AiRequest' class requires a key for authentication, a template or a template file path,
+a header, and a model. It provides a method for generating descriptions based on the provided text.
 
 Example usage:
 --------------
@@ -33,7 +33,8 @@ class AiRequest:
     """
     A class for making AI requests using OpenAI.
 
-    The 'AiRequest' class requires a key for authentication, a template or a template file path, a header, and a model.
+    The 'AiRequest' class requires a key for authentication, a template or a template file path,
+    a header, and a model.
     It provides a method for generating descriptions based on the provided text.
 
     Example usage:
@@ -56,7 +57,8 @@ class AiRequest:
 
     def __init__(self, key, template, template_file_path, header, model):
         """
-        Initialize the AiRequest object with the provided key, template, template file path, header, and model.
+        Initialize the AiRequest object with the provided key, template,
+        template file path, header, and model.
 
         Args:
             key (str): The OpenAI key for authentication.
