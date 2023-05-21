@@ -160,15 +160,14 @@ PullRequest: {self.__pulls}"
         Raises:
             requests.exceptions.RequestException: If the request to retrieve the diff fails.
         """
-        diff_url = self.__pulls.diff_url
-        logging.info(diff_url)
-
-        access_token = os.environ.get('GITHUB_TOKEN')
-        headers = {'Authorization': f'token {access_token}'}
-        response = requests.get(diff_url, headers=headers)
+        files = self.__pulls.get_files()
+        logging.info(files)
+        diff_content = ""
+        for file in files:
+            diff_content += file.patch
         logging.info("====Reponse:")
-        logging.info(response)
-        return response.text
+        logging.info(diff_content)
+        return diff_content
 
     def update_description(self, new_description):
         """
