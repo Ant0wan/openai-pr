@@ -104,14 +104,13 @@ Model: {self.__model}"
         """
         if template:
             return template
-        elif template_file_path:
-            try:
-                with open(template_file_path, "r") as file:
-                    return file.read()
-            except FileNotFoundError:
-                raise FileNotFoundError("Template file not found.")
-            except IOError:
-                raise IOError("Error reading the file.")
+        try:
+            with open(template_file_path, "r", encoding="utf-8") as file:
+                return file.read()
+        except FileNotFoundError as file_not_found_error:
+            raise FileNotFoundError("Template file not found.") from file_not_found_error
+        except IOError as io_error:
+            raise IOError("Error reading the file.") from io_error
 
     def generate_description(self, text):
         """
