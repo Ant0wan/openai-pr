@@ -2,6 +2,7 @@ import unittest
 import logging
 from configuration.logs import init
 
+
 class TestLogs(unittest.TestCase):
     def test_init_action_profile(self):
         config = {
@@ -19,8 +20,10 @@ class TestLogs(unittest.TestCase):
             }
         }
         init(config)
-        self.assertEqual(logging.getLogger().getEffectiveLevel(), logging.DEBUG)
+        self.assertEqual(
+            logging.getLogger().getEffectiveLevel(),
+            logging.DEBUG)
+
 
 if __name__ == '__main__':
     unittest.main()
-
