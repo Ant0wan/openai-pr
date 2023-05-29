@@ -25,7 +25,7 @@ init(config)
 import logging
 
 
-#def init(config: dict):
+# def init(config: dict):
 #    """
 #    Initialize the logging configuration based on the provided configuration
 #    dictionary.
@@ -70,9 +70,10 @@ def init(config: dict):
     datefmt = '%Y-%m-%d %H:%M:%S'
     logger = logging.getLogger()
     logger.handlers = []
-    logger.setLevel(logging.INFO if config['logs']['profile'] == 'action' else logging.DEBUG)
+    logger.setLevel(
+        logging.INFO
+        if config['logs']['profile'] == 'action' else logging.DEBUG)
     formatter = logging.Formatter(fmt=fmt, datefmt=datefmt)
     console_handler = logging.StreamHandler()
     console_handler.setFormatter(formatter)
     logger.addHandler(console_handler)
-
