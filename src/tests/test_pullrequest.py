@@ -1,73 +1,100 @@
 import unittest
-from unittest.mock import MagicMock, patch
-from github import Github
+from unittest.mock import patch, MagicMock
+
 from ghkit.pullrequest import PullRequest
+from configuration.preflight import Env
 
 
 class TestPullRequest(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        # Mock the subprocess.check_output() method
-        cls.mock_check_output = MagicMock(
-            return_value=b'https://github.com/owner/repo')
-        patch('subprocess.check_output', cls.mock_check_output).start()
-
-        # Create a mock GitHub instance
-        cls.mock_github = MagicMock(spec=Github)
-        cls.mock_repo = cls.mock_github.get_repo.return_value
-
-    @classmethod
-    def tearDownClass(cls):
-        # Stop patching subprocess.check_output()
-        patch.stopall()
-
     def setUp(self):
-        # Create a mock environment variable loader (Env) instance
-        self.mock_env = MagicMock()
+        # Mock the environment variables
+        self.mock_env = MagicMock(Env)
         self.mock_env.vars = {
             'GITHUB_BRANCH': 'test-branch'
         }
 
-    def test_init(self):
-        # Mock the _repository_url() method
-        mock_url = 'https://github.com/owner/repo'
-        with patch.object(PullRequest, '_repository_url', return_value=mock_url):
-            # Create a PullRequest instance
-            pull_request = PullRequest('github_token', self.mock_env)
+    @patch('ghkit.pullrequest.subprocess')
+    def test_repository_url(self, mock_subprocess):
+        # Mock the subprocess.check_output() call
+        mock_subprocess.check_output.return_value = b'git@github.com:owner/repo.git'
 
-        # Assert the initialization
-        self.assertEqual(pull_request._PullRequest__url, mock_url)
-        self.assertEqual(pull_request._PullRequest__branch, 'test-branch')
-        self.mock_github.get_repo.assert_called_once_with('owner/repo')
-        self.mock_repo.get_pulls.assert_called_once_with(
-            state='open', head='owner:test-branch')
+        # Create a PullRequest instance
+        pull_request = PullRequest('github_token', self.mock_env)
 
-    def test_diff(self):
-        # Mock the _pulls() method
-        mock_pulls = MagicMock()
+        # Assert the repository URL
+        self.assertEqual(
+            pull_request._repository_url(),
+            'git@github.com:owner/repo')
+
+    @patch('ghkit.pullrequest.Github')
+    def test_repository(self, mock_github):
+        # Create a mock repository object
+        mock_repository = MagicMock()
+        mock_github.return_value.get_repo.return_value = mock_repository
+
+        # Create a PullRequest instance
+        pull_request = PullRequest('github_token', self.mock_env)
+
+        # Assert the repository object
+        self.assertEqual(
+            pull_request._repository(
+                mock_github,
+                'git@github.com:owner/repo'),
+            mock_repository)
+
+    @patch('ghkit.pullrequest.Repository')
+    def test_pulls(self, mock_repository):
+        # Create a mock pull request object
+        mock_pull_request = MagicMock()
+        mock_pull_request.totalCount = 1
+        mock_pull_request.__getitem__.return_value = mock_pull_request
+
+        # Mock the get_pulls() method
+        mock_repository.return_value.get_pulls.return_value = mock_pull_request
+
+        # Create a PullRequest instance
+        pull_request = PullRequest('github_token', self.mock_env)
+
+        # Assert the pull request object
+        self.assertEqual(
+            pull_request._pulls(
+                mock_repository,
+                'test-branch'),
+            mock_pull_request)
+
+    @patch('ghkit.pullrequest.PullRequest._pulls')
+    def test_diff(self, mock_pulls):
+        # Create a mock file object
         mock_file = MagicMock()
-        mock_file.patch = 'diff_content'
-        mock_pulls.get_files.return_value = [mock_file]
-        with patch.object(PullRequest, '_pulls', return_value=mock_pulls):
-            # Create a PullRequest instance
-            pull_request = PullRequest('github_token', self.mock_env)
+        mock_file.patch = '@@ -10,7 +10,7 @@ def update_description(self, new_description):\n'
+
+        # Mock the get_files() method
+        mock_pulls.return_value.get_files.return_value = [mock_file]
+
+        # Create a PullRequest instance
+        pull_request = PullRequest('github_token', self.mock_env)
 
         # Call the diff() method
-        diff_content = pull_request.diff()
+        diff = pull_request.diff()
 
         # Assert the diff content
-        self.assertEqual(diff_content, 'diff_content')
+        self.assertEqual(
+            diff, '@@ -10,7 +10,7 @@ def update_description(self, new_description):\n')
 
-    def test_update_description(self):
-        # Mock the _pulls() method
-        mock_pulls = MagicMock()
-        with patch.object(PullRequest, '_pulls', return_value=mock_pulls):
-            # Create a PullRequest instance
-            pull_request = PullRequest('github_token', self.mock_env)
+    @patch('ghkit.pullrequest.PullRequest._pulls')
+    def test_update_description(self, mock_pulls):
+        # Create a PullRequest instance
+        pull_request = PullRequest('github_token', self.mock_env)
 
         # Call the update_description() method
         new_description = "Updated pull request description"
         pull_request.update_description(new_description)
 
         # Assert the description update
-        mock_pulls.edit.assert_called_once_with(body=new_description)
+        mock_pulls.assert_called_once()
+        mock_pulls.return_value.edit.assert_called_once_with(
+            body=new_description)
+
+
+if __name__ == '__main__':
+    unittest.main()
