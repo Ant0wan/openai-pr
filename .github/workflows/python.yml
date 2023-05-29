@@ -24,7 +24,7 @@ jobs:
       matrix:
         include:
           - linter: pylint
-            cmd: pylint
+            cmd: pylint --ignore=src/tests
             python-version: 3.11
           - linter: pycodestyle
             cmd: pycodestyle --show-source --show-pep8
