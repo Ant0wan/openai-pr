@@ -25,6 +25,31 @@ init(config)
 import logging
 
 
+#def init(config: dict):
+#    """
+#    Initialize the logging configuration based on the provided configuration
+#    dictionary.
+#
+#    The configuration dictionary should contain a 'logs' key, which itself
+#    should contain a 'profile' key specifying the desired logging profile.
+#    If the 'profile' value is 'action', the logging level will be set to INFO.
+#    Otherwise, the logging level will be set to DEBUG.
+#
+#    Args:
+#        config (dict): A dictionary containing the configuration parameters.
+#
+#    Returns:
+#        None
+#    """
+#    fmt = '[%(asctime)s] %(levelname)-7s %(message)s'
+#    datefmt = '%Y-%m-%d %H:%M:%S'
+#    if config['logs']['profile'] == 'action':
+#        logging.basicConfig(level=logging.INFO, format=fmt, datefmt=datefmt)
+#    else:
+#        logging.basicConfig(
+#            level=logging.DEBUG,
+#            format=fmt,
+#            datefmt=datefmt)
 def init(config: dict):
     """
     Initialize the logging configuration based on the provided configuration
@@ -43,10 +68,11 @@ def init(config: dict):
     """
     fmt = '[%(asctime)s] %(levelname)-7s %(message)s'
     datefmt = '%Y-%m-%d %H:%M:%S'
-    if config['logs']['profile'] == 'action':
-        logging.basicConfig(level=logging.INFO, format=fmt, datefmt=datefmt)
-    else:
-        logging.basicConfig(
-            level=logging.DEBUG,
-            format=fmt,
-            datefmt=datefmt)
+    logger = logging.getLogger()
+    logger.handlers = []
+    logger.setLevel(logging.INFO if config['logs']['profile'] == 'action' else logging.DEBUG)
+    formatter = logging.Formatter(fmt=fmt, datefmt=datefmt)
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(formatter)
+    logger.addHandler(console_handler)
+
