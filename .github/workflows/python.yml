@@ -27,7 +27,7 @@ jobs:
             cmd: pylint --ignore=src/tests
             python-version: 3.11
           - linter: pycodestyle
-            cmd: pycodestyle --show-source --show-pep8
+            cmd: pycodestyle --show-source --show-pep8 --exclude=src/tests
             python-version: 3.11
     steps:
       - uses: actions/checkout@v3
