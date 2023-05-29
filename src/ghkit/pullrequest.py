@@ -85,6 +85,46 @@ Repository: {self.__repository}, \
 Branch: {self.__branch}, \
 PullRequest: {self.__pulls}"
 
+    @property
+    def url(self):
+        """
+        Get the URL of the repository.
+
+        Returns:
+            str: The URL of the repository.
+        """
+        return self.__url
+
+    @property
+    def repository(self):
+        """
+        Get the repository name.
+
+        Returns:
+            str: The name of the repository.
+        """
+        return self.__repository
+
+    @property
+    def branch(self):
+        """
+        Get the current branch.
+
+        Returns:
+            str: The name of the current branch.
+        """
+        return self.__branch
+
+    @property
+    def pulls(self):
+        """
+        Get the list of pull requests.
+
+        Returns:
+            list: A list of pull requests.
+        """
+        return self.__pulls
+
     @staticmethod
     def _repository_url():
         """
