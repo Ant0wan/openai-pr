@@ -29,8 +29,7 @@ class TestPullRequest(unittest.TestCase):
         pull_request = PullRequest('github_token', self.mock_env)
         pull_request.update_description('new_description')
         mock_github().get_repo().get_pull.return_value.edit.assert_called_once_with(
-            body='new_description'
-        )
+            body='new_description')
 
     @patch('ghkit.pullrequest.Github')
     def test_diff(self, mock_github):
@@ -43,4 +42,3 @@ class TestPullRequest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
