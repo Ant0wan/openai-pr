@@ -11,4 +11,4 @@ preflights:
     - GITHUB_BRANCH
 logs:
   logging: 'configuration/logging.conf'
-  profile: action  # choose(dev|action)
+  profile: dev  # choose(dev|action)
