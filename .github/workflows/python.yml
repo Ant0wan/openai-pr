@@ -63,7 +63,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: pip install -r requirements.txt
       - run: python -m unittest discover -s tests -p 'test_*.py'
-        working-directory: src/tests
+        working-directory: src/
         env:
           ENV_VAR_1: value1
           ENV_VAR_2: value2
