@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: Ant0wan/openai-pr@0.0.1-beta
+      - uses: Ant0wan/openai-pr@v1
         with:
           api-key: ${{ secrets.OPENAI_API_KEY }}
         env:
@@ -79,7 +79,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Generate PR Description
-        uses: Ant0wan/openai-pr@0.0.1-beta
+        uses: Ant0wan/openai-pr@v1
         with:
           api-key: ${{ secrets.OPENAI_API_KEY }}
           model: "text-davinci-002"
@@ -121,7 +121,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Generate PR Description
-        uses: Ant0wan/openai-pr@0.0.1-beta
+        uses: Ant0wan/openai-pr@v1
         with:
           api-key: ${{ secrets.OPENAI_API_KEY }}
           template-filepath: ".github/PR_TEMPLATE.md"
