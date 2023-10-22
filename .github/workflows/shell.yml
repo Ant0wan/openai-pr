@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '*.sh'
+      - '.github/workflows/shell.yml'
 
 permissions: {}
 
