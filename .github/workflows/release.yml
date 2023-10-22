@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+defaults:
+  run:
+    shell: bash
+
+permissions: write-all
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Update major git tag
+      run: |
+        set -o pipefail
+        git tag --force "$(grep '^v[0-9]\+\.[0-9]\+\.[0-9]\+\(.*\)\?$' <<< ${GITHUB_REF#refs/*/} | sed 's/^v\([0-9]\+\)\..*/v\1/')"
+        git push --tag --force
+  note:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - run: gh release create ${GITHUB_REF#refs/*/} --generate-notes
