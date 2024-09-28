@@ -1,7 +1,9 @@
 #!/bin/sh
 set -o errexit
-# shellcheck source=dev/env-01.sh
+set -o allexport
+# shellcheck source=dev/01.env
 . "$1"
+set +o allexport
 
 FILE='short_commit_sha'
 CONTENT="$(git rev-parse --short HEAD)"

@@ -1,5 +1,0 @@
-export INPUT_MODEL="text-davinci-003"
-export INPUT_TEMPLATE=""
-export INPUT_TEMPLATE_FILEPATH=".github/PULL_REQUEST_TEMPLATE.md"
-export INPUT_HEADER="Based on the output of the command \`git diff\`, could you please generate a pull request description using the provided information? Be concise. Description must follow this format:\n"
-export GITHUB_ACTION_PATH=""

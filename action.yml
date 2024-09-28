@@ -48,4 +48,3 @@ runs:
         INPUT_MODEL: ${{ inputs.model }}
         OPENAI_API_KEY: ${{ inputs.api-key }}
         GITHUB_BRANCH: ${{ github.head_ref }}
-          #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
