@@ -15,9 +15,9 @@ frozenlist==1.4.1
 idna==3.10
 multidict==6.0.4
 openai==0.27.6
-pycparser==2.21
-requests==2.32.2
-tqdm==4.66.3
-urllib3==2.2.2
-wrapt==1.15.0
-yarl==1.9.2
+pycparser==2.22
+requests==2.32.3
+tqdm==4.66.5
+urllib3==2.2.3
+wrapt==1.16.0
+yarl==1.13.1
