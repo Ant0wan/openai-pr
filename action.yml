@@ -8,7 +8,7 @@ inputs:
   model:
     description: 'OpenAI model in use'
     required: false
-    default: "text-davinci-003"
+    default: "gpt-3.5-turbo"
   template:
     description: 'PR content template for OpenAI to understand what must be in the pull request description'
     required: false

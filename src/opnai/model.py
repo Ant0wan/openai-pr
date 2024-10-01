@@ -96,9 +96,11 @@ Header: {self.__header}, Model: {self.__model}"
         """
         data = self.__header + self.__template + "\n\n" + text
         openai.api_key = self.__key
-        response = openai.Completion.create(
+        client = openai.OpenAI()
+        response = client.chat.completions.create(
             model=self.__model,
-            prompt=data,
+                    {"role": "system", "content": "You are a helpful assistant."},  # Rework to do here
+            messages=[{"role": "user", "content": data}],
             temperature=0.9,
             max_tokens=150,
             top_p=1,
